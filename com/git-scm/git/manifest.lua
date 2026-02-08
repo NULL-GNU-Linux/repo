@@ -53,7 +53,7 @@ function pkg.source()
 		end)
 
 		hook("install")(function()
-			make()
+			make({}, false)
 		end)
 	end
 end
