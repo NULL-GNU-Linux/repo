@@ -15,7 +15,7 @@ pkg = {
 		},
 		source = {
 			type = "tar",
-			url = "https://www.kernel.org/pub/software/scm/git/git-" .. pkg.version .. ".tar.gz",
+			url = "https://www.kernel.org/pub/software/scm/git/git-" .. version .. ".tar.gz",
 		},
 	},
 	options = {
