@@ -25,29 +25,34 @@ pkg = {
 	conflicts = {},
 	provides = { "linux" },
 	sources = {
-		binary = {
-			type = "tar",
-			url = "https://example.com/something.tar.gz"
-		},
+		-- .. binary set below ..
 		source = {
 			type = "git",
 			url = "https://github.com/torvalds/linux",
-			commit = "master"
-		}
+			commit = "master",
+		},
 	},
 	options = {
 		menuconfig = {
 			type = "boolean",
-			default = false
+			default = false,
 		},
 		no_modules = {
 			type = "boolean",
 			default = false,
-			description = "disables compiling modules"
+			description = "disables compiling modules",
 		},
 	},
 }
 
+pkg.sources.binary = {
+	type = "tar",
+	url = "https://cdn.kernel.org/pub/linux/kernel/v"
+		.. pkg.version:match("^(%d+)")
+		.. ".x/linux-"
+		.. pkg.version
+		.. ".tar.xz",
+}
 function pkg.source()
 	return function(hook)
 		hook("prepare")(function()
@@ -55,7 +60,7 @@ function pkg.source()
 		end)
 
 		hook("build")(function()
-			make({"defconfig"}, false)
+			make({ "defconfig" }, false)
 			make()
 		end)
 
@@ -64,9 +69,9 @@ function pkg.source()
 		end)
 
 		hook("install")(function()
-			make()
+			make({}, false)
 			if not OPTIONS.no_modules then
-				make({"modules_install"})
+				make({ "modules_install" }, false)
 			end
 		end)
 
