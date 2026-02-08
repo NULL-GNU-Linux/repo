@@ -35,8 +35,14 @@ function pkg.source()
 		end)
 
 		hook("build")(function()
+			local static = ""
+			if OPTIONS.static then
+				static = "LD_FLAGS='-static'"
+			else
+				static = ""
+			end
 			configure({
-				'LDFLAGS="-static"',
+				static,
 				"NO_SHARED=1",
 				"--prefix=/usr",
 				"--with-openssl",
