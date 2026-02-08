@@ -24,13 +24,6 @@ pkg = {
 	depends = {},
 	conflicts = {},
 	provides = { "linux" },
-	sources = {
-		-- .. im lazy to put the binary rn ..
-		source = {
-			type = "git",
-			url = "https://github.com/torvalds/linux",
-		},
-	},
 	options = {
 		menuconfig = {
 			type = "boolean",
@@ -43,7 +36,16 @@ pkg = {
 		},
 	},
 }
-pkg.sources.source.tag = "v" .. pkg.version
+pkg.sources = {
+	source = {
+		type = "tar",
+		url = "https://cdn.kernel.org/pub/linux/kernel/v"
+			.. pkg.version:match("^(%d+)")
+			.. ".x/linux-"
+			.. pkg.version
+			.. ".tar.xz",
+	},
+}
 function pkg.source()
 	return function(hook)
 		hook("prepare")(function()
