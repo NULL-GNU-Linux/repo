@@ -8,22 +8,23 @@ pkg = {
 	depends = {},
 	conflicts = {},
 	provides = { "git" },
-	sources = {
-		binary = {
-			type = "tar",
-			url = "https://example.com/something.tar.gz",
-		},
-		source = {
-			type = "tar",
-			url = "https://www.kernel.org/pub/software/scm/git/git-" .. version .. ".tar.gz",
-		},
-	},
 	options = {
 		static = {
 			type = "boolean",
 			default = false,
 			description = "compile git statically",
 		},
+	},
+}
+
+pkg.sources = {
+	binary = {
+		type = "tar",
+		url = "https://example.com/something.tar.gz",
+	},
+	source = {
+		type = "tar",
+		url = "https://www.kernel.org/pub/software/scm/git/git-" .. pkg.version .. ".tar.gz",
 	},
 }
 
