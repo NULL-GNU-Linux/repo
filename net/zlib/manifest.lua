@@ -36,9 +36,9 @@ function pkg.source()
 
 		hook("build")(function()
 			if OPTIONS.static then
-			    configure({"--static", "--prefix=" .. ROOT .. "/usr"})
+			    configure({"--static", "--prefix=/usr"})
 			else
-			    configure({"--prefix=" .. ROOT .. "/usr"})
+			    configure({"--prefix=/usr"})
 			end
 			make()
 		end)
