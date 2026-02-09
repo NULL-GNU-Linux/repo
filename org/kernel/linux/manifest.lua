@@ -23,7 +23,7 @@ pkg = {
 	homepage = "https://kernel.org",
 	depends = {},
 	conflicts = {},
-	provides = { "linux" },
+	provides = { "linux", "kernel" },
 	options = {
 		menuconfig = {
 			type = "boolean",
@@ -53,7 +53,7 @@ function pkg.source()
 		end)
 
 		hook("build")(function()
-			make({ "defconfig" }, false)
+			make({ "defconfig" })
 			make()
 		end)
 
