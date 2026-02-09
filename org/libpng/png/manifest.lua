@@ -47,7 +47,7 @@ function pkg.source()
 			if not OPTIONS.tests then
 				configure_opts = configure_opts .. " --disable-test"
 			end
-			exec("./configure " .. configure_opts)
+			configure(configure_opts)
 			make()
 		end)
 
