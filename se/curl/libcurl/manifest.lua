@@ -1,5 +1,5 @@
 pkg = {
-	name = "org.libcurl.libcurl",
+	name = "se.curl.libcurl",
 	version = "8.18.0",
 	description = "Command line tool and library for transferring data with URLs",
 	maintainer = "NEOAPPS <neo@obsidianos.xyz>",
