@@ -35,9 +35,9 @@ function pkg.source()
 		end)
 
 		hook("build")(function()
-			exec("./bootstrap --prefix=/usr --mandir=/usr/share/man --docdir=/usr/share/doc/cmake --system-libs")
+			configure({"--prefix=/usr", "--mandir=/usr/share/man", "--docdir=/usr/share/doc/cmake", "--system-libs"})
 			if OPTIONS.gui then
-				exec("./bootstrap --prefix=/usr --mandir=/usr/share/man --docdir=/usr/share/doc/cmake --system-libs --qt-gui")
+				configure({"--prefix=/usr", "--mandir=/usr/share/man", "--docdir=/usr/share/doc/cmake", "--system-libs", "--qt-gui"})
 			end
 			make()
 		end)
