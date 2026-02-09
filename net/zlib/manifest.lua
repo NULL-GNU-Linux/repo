@@ -1,5 +1,5 @@
 pkg = {
-	name = "org.zlib",
+	name = "net.zlib",
 	version = "1.3.1",
 	description = "Massively spiffy yet delicately unobtrusive compression library",
 	maintainer = "NEOAPPS <neo@obsidianos.xyz>",
