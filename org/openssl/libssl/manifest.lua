@@ -55,7 +55,7 @@ function pkg.source()
 			if OPTIONS.fips then
 				table.insert(configure_opts, "enable-fips")
 			end
-			configure(configure_opts)
+			configure(configure_opts, "Configure")
 			make()
 		end)
 
