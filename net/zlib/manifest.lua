@@ -36,9 +36,9 @@ function pkg.source()
 
 		hook("build")(function()
 			if OPTIONS.static then
-			    configure({"--static", "--prefix=" .. ROOT .. "usr"})
+			    configure({"--static", "--prefix=" .. ROOT .. "/usr"})
 			else
-			    configure({"--prefix=" .. ROOT .. "usr"})
+			    configure({"--prefix=" .. ROOT .. "/usr"})
 			end
 			make()
 		end)
@@ -56,7 +56,7 @@ end
 function pkg.binary()
 	return function(hook)
 		hook("install")(function()
-			exec("tar -xf zlib-" .. pkg.version .. "-linux-x86_64.tar.xz -C " .. ROOT .. "usr")
+			exec("tar -xf zlib-" .. pkg.version .. "-linux-x86_64.tar.xz -C " .. ROOT .. "/usr")
 		end)
 	end
 end

@@ -55,7 +55,7 @@ end
 function pkg.binary()
 	return function(hook)
 		hook("install")(function()
-			exec("sh cmake-" .. pkg.version .. "-linux-x86_64.sh --skip-license --prefix=" .. ROOT .. "usr")
+			exec("sh cmake-" .. pkg.version .. "-linux-x86_64.sh --skip-license --prefix=" .. ROOT .. "/usr")
 		end)
 	end
 end
