@@ -54,6 +54,9 @@ function pkg.source()
 
 		hook("build")(function()
 			make({ "defconfig" })
+			if OPTIONS.menuconfig then
+				make({ "menuconfig" })
+			end
 			make()
 		end)
 
