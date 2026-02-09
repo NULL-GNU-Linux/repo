@@ -1,5 +1,5 @@
 pkg = {
-	name = "org.cmake.cmake",
+	name = "org.cmake",
 	version = "4.2.3",
 	description = "Cross-platform build system generator",
 	maintainer = "NEOAPPS <neo@obsidianos.xyz>",
