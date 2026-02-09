@@ -72,7 +72,7 @@ end
 function pkg.binary()
 	return function(hook)
 		hook("install")(function()
-		    install({"openssl", "--target-directory=/usr/bin/"})
+		    install({"openssl", "--target-directory=" .. CONFIG.TEMP_INSTALL_PATH .. "/" .. pkg.name .. "/usr/bin/"})
 		end)
 	end
 end
