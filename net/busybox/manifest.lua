@@ -16,12 +16,12 @@ pkg = {
 		},
 		oldconfig = {
 			type = "boolean",
-			default = false,
+			default = true,
 			description = "use existing config and update for new options",
 		},
 		config = {
 			type = "string",
-			default = "",
+			default = "config",
 			description = "path to busybox config file to use",
 		},
 		defconfig = {
@@ -43,7 +43,7 @@ pkg.sources = {
 		{
 			type = "file",
 			url = "https://raw.githubusercontent.com/NULL-GNU-Linux/busybox/refs/heads/main/" .. pkg.version,
-			name = ".config"
+			name = "config"
 		},
 	},
 	binary = {
