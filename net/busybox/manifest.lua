@@ -7,7 +7,7 @@ pkg = {
 	homepage = "https://busybox.net",
 	depends = {},
 	conflicts = {},
-	provides = { "busybox", "sh", "ls", "cat", "vi", "chmod", "chown", "modprobe", "insmod" },
+	provides = { "busybox", "sh", "ls", "cat", "vi", "chmod", "chown", "modprobe", "insmod", "ash", "runit", "init" },
 	options = {
 		menuconfig = {
 			type = "boolean",
@@ -35,6 +35,9 @@ pkg.sources = {
 	source = {
 		type = "tar",
 		url = "https://github.com/mirror/busybox/archive/refs/tags/" .. pkg.version:gsub("%.", "_") .. ".tar.gz",
+		patches = {
+			{url="https://raw.githubusercontent.com/NULL-GNU-Linux/busybox/refs/heads/main/gcc15.patch", sha256sum="e431c8cf88e7d171db9513fd2deb0a10c22bed5288e02cffd4df4dc4c5ac5502", md5sum="a167657576a5a46c9c45cfc52beca199"}
+		}
 	},
 	binary = {
 		type = "file",
