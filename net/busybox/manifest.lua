@@ -58,7 +58,7 @@ function pkg.source()
 		end)
 
 		hook("build")(function()
-			if OPTIONS.config and OPTIONS.config ~= "" then
+			if OPTIONS.config ~= "" then
 				if exec("test -f " .. OPTIONS.config) then
 					exec("cp " .. OPTIONS.config .. " .config")
 					if OPTIONS.oldconfig then
@@ -78,7 +78,7 @@ function pkg.source()
 		end)
 
 		hook("install")(function()
-			make({}, false)
+			make({}, false, "CONFIG_PREFIX")
 		end)
 
 		hook("post_install")(function()
