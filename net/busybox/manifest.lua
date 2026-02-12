@@ -26,18 +26,25 @@ pkg = {
 		},
 		defconfig = {
 			type = "boolean",
-			default = true,
+			default = false,
 			description = "use default busybox configuration",
 		},
 	},
 }
 pkg.sources = {
 	source = {
-		type = "tar",
-		url = "https://github.com/mirror/busybox/archive/refs/tags/" .. pkg.version:gsub("%.", "_") .. ".tar.gz",
-		patches = {
-			{url="https://raw.githubusercontent.com/NULL-GNU-Linux/busybox/refs/heads/main/gcc15.patch", sha256sum="e431c8cf88e7d171db9513fd2deb0a10c22bed5288e02cffd4df4dc4c5ac5502", md5sum="a167657576a5a46c9c45cfc52beca199"}
-		}
+		{
+			type = "tar",
+			url = "https://github.com/mirror/busybox/archive/refs/tags/" .. pkg.version:gsub("%.", "_") .. ".tar.gz",
+			patches = {
+				{ url = "https://raw.githubusercontent.com/NULL-GNU-Linux/busybox/refs/heads/main/gcc15.patch", sha256sum = "e431c8cf88e7d171db9513fd2deb0a10c22bed5288e02cffd4df4dc4c5ac5502" }
+			}
+		},
+		{
+			type = "file",
+			url = "https://raw.githubusercontent.com/NULL-GNU-Linux/busybox/refs/heads/main/" .. pkg.version,
+			name = ".config"
+		},
 	},
 	binary = {
 		type = "file",
