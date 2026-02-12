@@ -7,7 +7,7 @@ pkg = {
 	homepage = "https://busybox.net",
 	depends = {},
 	conflicts = {},
-	provides = { "busybox", "sh", "ls", "cat", "vi", "chmod", "chown", "modprobe", "insmod", "ash", "runit", "init" },
+	provides = { "busybox", "sh", "ls", "cat", "cp", "vi", "chmod", "chown", "modprobe", "insmod", "ash", "runit", "init", "clear", "switch_root", "pivot_root", "install", "coreutils", "util-linux" },
 	options = {
 		menuconfig = {
 			type = "boolean",
@@ -78,7 +78,9 @@ function pkg.source()
 		end)
 
 		hook("install")(function()
-			make({}, false, "CONFIG_PREFIX")
+		    local path = CONFIG.TEMP_INSTALL_PATH .. "/" .. pkg.name
+			exec("mkdir -p " .. path .. "/usr/bin/")
+		    install({"busybox", "--target-directory=" .. path .. "/usr/bin/"})
 		end)
 
 		hook("post_install")(function()
