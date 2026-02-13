@@ -91,8 +91,8 @@ function pkg.source()
 						make({ "oldconfig" })
 					end
 				else
-					print("Warning: Config file " .. OPTIONS.config .. " not found, using defconfig")
-					make({ "defconfig" })
+					curl("https://raw.githubusercontent.com/NULL-GNU-Linux/busybox/refs/heads/main/" .. pkg.version, ".config", {"-fsSL"})
+					make({ "oldconfig" })
 				end
 			elseif OPTIONS.defconfig or (not OPTIONS.menuconfig and not OPTIONS.oldconfig) then
 				make({ "defconfig" })
