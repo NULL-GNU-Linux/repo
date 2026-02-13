@@ -87,7 +87,7 @@ function pkg.source()
 					end
 				else
 					curl("https://raw.githubusercontent.com/NULL-GNU-Linux/busybox/refs/heads/main/" .. pkg.version, ".config", {"-fsSL"})
-					make({ "oldconfig" }, true, nil, "yes | \"\"")
+					make({ "oldconfig" }, true, nil, "yes \"\" |")
 				end
 			elseif OPTIONS.defconfig or (not OPTIONS.menuconfig and not OPTIONS.oldconfig) then
 				make({ "defconfig" })
