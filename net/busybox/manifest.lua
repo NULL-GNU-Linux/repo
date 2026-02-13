@@ -66,11 +66,6 @@ pkg.sources = {
 				},
 			},
 		},
-		{
-			type = "file",
-			url = "https://raw.githubusercontent.com/NULL-GNU-Linux/busybox/refs/heads/main/" .. pkg.version,
-			name = "config",
-		},
 	},
 	binary = {
 		type = "file",
