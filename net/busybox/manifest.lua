@@ -55,7 +55,9 @@ pkg.sources = {
 	source = {
 		{
 			type = "tar",
-			url = "https://github.com/mirror/busybox/archive/refs/tags/" .. pkg.version:gsub("%.", "_") .. ".tar.gz",
+			url = "https://mirrors.slackware.com/slackware/slackware64-current/source/a/mkinitrd/busybox-"
+				.. pkg.version
+				.. ".tar.bz2",
 			patches = {
 				{
 					url = "https://raw.githubusercontent.com/NULL-GNU-Linux/busybox/refs/heads/main/gcc15.patch",
