@@ -1,13 +1,33 @@
 pkg = {
 	name = "net.busybox",
-	version = "1.36.1",
+	version = "1.37.0",
 	description = "The Swiss Army Knife of Embedded Linux",
 	maintainer = "NEOAPPS <neo@obsidianos.xyz>",
 	license = "GPL-2.0",
 	homepage = "https://busybox.net",
 	depends = {},
 	conflicts = {},
-	provides = { "busybox", "sh", "ls", "cat", "cp", "vi", "chmod", "chown", "modprobe", "insmod", "ash", "runit", "init", "clear", "switch_root", "pivot_root", "install", "coreutils", "util-linux" },
+	provides = {
+		"busybox",
+		"sh",
+		"ls",
+		"cat",
+		"cp",
+		"vi",
+		"chmod",
+		"chown",
+		"modprobe",
+		"insmod",
+		"ash",
+		"runit",
+		"init",
+		"clear",
+		"switch_root",
+		"pivot_root",
+		"install",
+		"coreutils",
+		"util-linux",
+	},
 	options = {
 		menuconfig = {
 			type = "boolean",
@@ -37,13 +57,16 @@ pkg.sources = {
 			type = "tar",
 			url = "https://github.com/mirror/busybox/archive/refs/tags/" .. pkg.version:gsub("%.", "_") .. ".tar.gz",
 			patches = {
-				{ url = "https://raw.githubusercontent.com/NULL-GNU-Linux/busybox/refs/heads/main/gcc15.patch", sha256sum = "e431c8cf88e7d171db9513fd2deb0a10c22bed5288e02cffd4df4dc4c5ac5502" }
-			}
+				{
+					url = "https://raw.githubusercontent.com/NULL-GNU-Linux/busybox/refs/heads/main/gcc15.patch",
+					sha256sum = "e431c8cf88e7d171db9513fd2deb0a10c22bed5288e02cffd4df4dc4c5ac5502",
+				},
+			},
 		},
 		{
 			type = "file",
 			url = "https://raw.githubusercontent.com/NULL-GNU-Linux/busybox/refs/heads/main/" .. pkg.version,
-			name = "config"
+			name = "config",
 		},
 	},
 	binary = {
@@ -78,9 +101,9 @@ function pkg.source()
 		end)
 
 		hook("install")(function()
-		    local path = CONFIG.TEMP_INSTALL_PATH .. "/" .. pkg.name
+			local path = CONFIG.TEMP_INSTALL_PATH .. "/" .. pkg.name
 			exec("mkdir -p " .. path .. "/usr/bin/")
-		    install({"busybox", "--target-directory=" .. path .. "/usr/bin/"})
+			install({ "busybox", "--target-directory=" .. path .. "/usr/bin/" })
 		end)
 
 		hook("post_install")(function()
@@ -98,7 +121,7 @@ function pkg.binary()
 		hook("install")(function()
 			local path = CONFIG.TEMP_INSTALL_PATH .. "/" .. pkg.name
 			exec("mkdir -p " .. path .. "/usr/bin/")
-			install({"busybox", "--target-directory=" .. path .. "/usr/bin/"})
+			install({ "busybox", "--target-directory=" .. path .. "/usr/bin/" })
 		end)
 
 		hook("post_install")(function()
