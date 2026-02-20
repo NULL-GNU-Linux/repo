@@ -1,19 +1,3 @@
---- Example package manifest demonstrating comprehensive kernel package configuration
---
--- This manifest serves as a complete example of how to structure package definitions
--- in the pkglet system, showcasing all major features including dual source/binary
--- support, build options, dependency management, and custom build procedures. The
--- manifest demonstrates best practices for package naming, versioning, metadata
--- completeness, and build system integration. It illustrates how to handle complex
--- packages like the Linux kernel that require extensive configuration options,
--- multiple build phases, and specialized installation procedures.
---
--- The example shows proper use of dot notation for hierarchical naming, comprehensive
--- metadata for package discovery, flexible source specification supporting both
--- development and release workflows, and advanced build options for user customization.
--- This manifest can serve as a template for other complex system packages.
--- @module example-manifest
-
 pkg = {
 	name = "org.kernel.linux",
 	version = "6.19.3",
@@ -56,6 +40,11 @@ pkg.sources = {
 			.. pkg.version
 			.. ".tar.xz",
 	},
+	binary = {
+	    type = "tar",
+		url = "https://files.obsidianos.xyz/~neo/null/" .. ARCH .. "-linux.tar",
+		sha256sum = "73b7203c351926f282aa2f1007de977f2fffe473c46ca1d14d6bba31e7d6f793",
+	},
 }
 function pkg.source()
 	return function(hook)
@@ -96,7 +85,6 @@ function pkg.source()
 end
 
 function pkg.binary()
-	tmpdir = os.getenv("HOME") .. "/.cache/pkglet/build/" .. pkg.name
 	return function(hook)
 		hook("pre_install")(function()
 			print("Preparing binary installation...")
