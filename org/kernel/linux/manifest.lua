@@ -66,7 +66,7 @@ function pkg.source()
 		end)
 
 		hook("install")(function()
-			make({}, false)
+			make({}, false, "INSTALL_PATH")
 			if not OPTIONS.no_modules then
 				make({ "modules_install" }, false)
 			end
