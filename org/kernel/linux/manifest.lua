@@ -69,9 +69,9 @@ function pkg.source()
 		end)
 
 		hook("install")(function()
-			make({ "INSTALL_PATH=" .. CONFIG.TEMP_INSTALL_PATH .. "/" .. pkg.name, "install" })
+			make({ "INSTALL_PATH=" .. CONFIG.TEMP_INSTALL_PATH .. "/" .. pkg.name .. "/boot", "install" })
 			if not OPTIONS.no_modules then
-				make({ "INSTALL_MOD_PATH=" .. CONFIG.TEMP_INSTALL_PATH .. "/" .. pkg.name, "modules_install" })
+				make({ "INSTALL_MOD_PATH=" .. CONFIG.TEMP_INSTALL_PATH .. "/" .. pkg.name .. "/usr", "modules_install" })
 			end
 			if not OPTIONS.no_headers then
 			    make({"headers_install", "ARCH=" .. ARCH, "INSTALL_HDR_PATH=" .. CONFIG.TEMP_INSTALL_PATH .. "/" .. pkg.name .. "/usr"})
@@ -86,16 +86,31 @@ end
 
 function pkg.binary()
 	return function(hook)
-		hook("pre_install")(function()
-			print("Preparing binary installation...")
-		end)
-
 		hook("install")(function()
-			print("Installing binary package...")
-		end)
-
-		hook("post_install")(function()
-			print("Binary package installed")
+		    local path = CONFIG.TEMP_INSTALL_PATH .. "/" .. pkg.name
+			exec("mkdir -p " .. path .. "/usr")
+			exec("mkdir -p " .. path .. "/boot")
+			if not OPTIONS.no_modules then
+			   local ok, result = pcall(function() install({ "lib", "--target-directory=" .. path .. "/usr/", "-d" }) end)
+			   if not ok then
+					install({"usr/lib", "--target-directory=" .. path, "-d"})
+			   end
+			end
+			if not OPTIONS.no_headers then
+			    install({ "usr/include", "--target-directory=" .. path .. "/usr/include", "-d" })
+			end
+			local ok1, result = pcall(function() install({ "vmlinuz-" .. pkg.version .. "-null", "--target-directory=" .. path .. "/boot" }) end)
+			if not ok1 then
+			    install({ "boot/vmlinuz-" .. pkg.version .. "-null", "--target-directory=" .. path .. "/boot" })
+			end
+			local ok2, result = pcall(function() install({ "config-" .. pkg.version .. "-null", "--target-directory=" .. path .. "/boot" }) end)
+			if not ok2 then
+			    install({ "config-" .. pkg.version .. "-null", "--target-directory=" .. path .. "/boot" })
+			end
+			local ok3, result = pcall(function() install({ "System.map-" .. pkg.version .. "-null", "--target-directory=" .. path .. "/boot" }) end)
+			if not ok3 then
+			    install({ "System.map-" .. pkg.version .. "-null", "--target-directory=" .. path .. "/boot" })
+			end
 		end)
 	end
 end
