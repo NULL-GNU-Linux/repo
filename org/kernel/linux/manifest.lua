@@ -40,6 +40,11 @@ pkg = {
 			default = false,
 			description = "disables compiling modules",
 		},
+		no_headers = {
+		    type = "boolean",
+			default = false,
+			description = "disables installing kernel headers"
+		}
 	},
 }
 pkg.sources = {
@@ -78,6 +83,9 @@ function pkg.source()
 			make({ "INSTALL_PATH=" .. CONFIG.TEMP_INSTALL_PATH .. "/" .. pkg.name, "install" })
 			if not OPTIONS.no_modules then
 				make({ "INSTALL_MOD_PATH=" .. CONFIG.TEMP_INSTALL_PATH .. "/" .. pkg.name, "modules_install" })
+			end
+			if not OPTIONS.no_headers then
+			    make({"headers_install", "ARCH=" .. ARCH, "INSTALL_HDR_PATH=" .. CONFIG.TEMP_INSTALL_PATH .. "/" .. pkg.name .. "/usr"})
 			end
 		end)
 
