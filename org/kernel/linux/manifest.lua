@@ -68,7 +68,7 @@ function pkg.source()
 		hook("install")(function()
 			make({}, false, "INSTALL_PATH")
 			if not OPTIONS.no_modules then
-				make({ "modules_install" }, false, "INSTALL_PATH")
+				make({ "modules_install" }, false, "INSTALL_MOD_PATH")
 			end
 			local path = CONFIG.TEMP_INSTALL_PATH .. "/" .. pkg.name
 			exec("mkdir -p " .. path .. "/usr/src/linux/")
