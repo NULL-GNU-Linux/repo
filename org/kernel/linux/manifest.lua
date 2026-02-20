@@ -70,9 +70,6 @@ function pkg.source()
 			if not OPTIONS.no_modules then
 				make({ "modules_install" }, false, "INSTALL_MOD_PATH")
 			end
-			local path = CONFIG.TEMP_INSTALL_PATH .. "/" .. pkg.name
-			exec("mkdir -p " .. path .. "/usr/src/linux/")
-            install({".config", "--target-directory=" .. path .. "/usr/src/linux/.config"})
 		end)
 
 		hook("post_install")(function()
