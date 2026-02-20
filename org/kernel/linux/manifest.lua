@@ -68,7 +68,7 @@ function pkg.source()
 		hook("install")(function()
 			make({}, false, "INSTALL_PATH")
 			if not OPTIONS.no_modules then
-				make({ "modules_install" }, false, "INSTALL_MOD_PATH")
+				make({ "INSTALL_MOD_PATH=" .. CONFIG.TEMP_INSTALL_PATH .. "/" .. pkg.name, "modules_install" })
 			end
 		end)
 
