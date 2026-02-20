@@ -16,7 +16,7 @@
 
 pkg = {
 	name = "org.kernel.linux",
-	version = "6.17.5",
+	version = "6.19.3",
 	description = "The Linux Kernel",
 	maintainer = "NEOAPPS <neo@obsidianos.xyz>",
 	license = "GPL-2.0",
