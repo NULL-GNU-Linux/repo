@@ -56,13 +56,13 @@ function pkg.source()
 	return function(hook)
 		hook("prepare")(function()
 			print("Preparing kernel build...")
-			curl("https://raw.githubusercontent.com/NULL-GNU-Linux/linux/refs/heads/main/" .. ARCH, ".conf", {"-fsSL"})
+			curl("https://raw.githubusercontent.com/NULL-GNU-Linux/linux/refs/heads/main/" .. ARCH .. ".conf", ".config", {"-fsSL"})
 		end)
 
 		hook("build")(function()
 			make({ "defconfig" })
 			if not OPTIONS.defconfig then
-			    make({ "oldconfig" }, true, nil, "cp " .. ARCH .. ".conf .config && yes \"\" |")
+			    make({ "oldconfig" }, true, nil, "yes \"\" |")
 			end
 			if OPTIONS.menuconfig then
 				make({ "menuconfig" })
