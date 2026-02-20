@@ -30,6 +30,11 @@ pkg = {
 			default = false,
 			description = "shows a config menu before compiling",
 		},
+		defconfig = {
+		    type = "boolean",
+			default = false,
+			description = "use kernel's default config rather than NULL's",
+		},
 		no_modules = {
 			type = "boolean",
 			default = false,
@@ -51,10 +56,14 @@ function pkg.source()
 	return function(hook)
 		hook("prepare")(function()
 			print("Preparing kernel build...")
+			curl("https://raw.githubusercontent.com/NULL-GNU-Linux/linux/refs/heads/main/" .. ARCH, ".conf", {"-fsSL"})
 		end)
 
 		hook("build")(function()
 			make({ "defconfig" })
+			if not OPTIONS.defconfig then
+			    make({ "oldconfig" }, true, nil, "yes \"\" |")
+			end
 			if OPTIONS.menuconfig then
 				make({ "menuconfig" })
 			end
