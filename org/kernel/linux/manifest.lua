@@ -28,6 +28,7 @@ pkg = {
 		menuconfig = {
 			type = "boolean",
 			default = false,
+			description = "shows a config menu before compiling",
 		},
 		no_modules = {
 			type = "boolean",
@@ -69,6 +70,9 @@ function pkg.source()
 			if not OPTIONS.no_modules then
 				make({ "modules_install" }, false)
 			end
+			local path = CONFIG.TEMP_INSTALL_PATH .. "/" .. pkg.name
+			exec("mkdir -p " .. path .. "/usr/src/linux/")
+            install({".config", "--target-directory=" .. path .. "/usr/src/linux/.config"})
 		end)
 
 		hook("post_install")(function()
