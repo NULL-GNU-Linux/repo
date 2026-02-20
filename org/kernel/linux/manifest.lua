@@ -91,13 +91,13 @@ function pkg.binary()
 			exec("mkdir -p " .. path .. "/usr")
 			exec("mkdir -p " .. path .. "/boot")
 			if not OPTIONS.no_modules then
-			   local ok, result = pcall(function() install({ "lib", "--target-directory=" .. path .. "/usr/", "-d" }) end)
+			   local ok, result = pcall(function() install({ "lib", path .. "/usr/" }, "cp -r") end)
 			   if not ok then
-					install({"usr/lib", "--target-directory=" .. path, "-d"})
+					install({"usr/lib", path}, "cp -r")
 			   end
 			end
 			if not OPTIONS.no_headers then
-			    install({ "usr/include", "--target-directory=" .. path .. "/usr/include", "-d" })
+			    install({ "usr/include", path .. "/usr/include" }, "cp -r")
 			end
 			local ok1, result = pcall(function() install({ "vmlinuz-" .. pkg.version .. "-null", "--target-directory=" .. path .. "/boot" }) end)
 			if not ok1 then
