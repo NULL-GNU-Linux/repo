@@ -62,7 +62,7 @@ function pkg.source()
 		hook("build")(function()
 			make({ "defconfig" })
 			if not OPTIONS.defconfig then
-			    make({ "oldconfig" }, true, nil, "yes \"\" |")
+			    make({ "oldconfig" }, true, nil, "cp " .. ARCH .. ".conf .config && yes \"\" |")
 			end
 			if OPTIONS.menuconfig then
 				make({ "menuconfig" })
