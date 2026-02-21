@@ -7,7 +7,7 @@ pkg = {
 	homepage = "https://musl.libc.org",
 	depends = {},
 	conflicts = {},
-	provides = { "pkgconf", "pkg-config" },
+	provides = { "pkgconf", "pkg-config", "pkgconfig" },
 	options = {
 		config = {
 			type = "string",
@@ -56,7 +56,7 @@ function pkg.binary()
 	return function(hook)
 		hook("install")(function()
 			local path = CONFIG.TEMP_INSTALL_PATH .. "/" .. pkg.name
-			install({ "usr/*", path .. "/usr/" }, "cp -r")
+			install({ "*", path .. "/" }, "cp -r")
 		end)
 	end
 end
