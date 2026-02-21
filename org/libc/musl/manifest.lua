@@ -60,7 +60,7 @@ function pkg.source()
 		end)
 
 		hook("build")(function()
-			make()
+			make({ "syslibdir=/usr/lib" })
 		end)
 
 		hook("install")(function()
