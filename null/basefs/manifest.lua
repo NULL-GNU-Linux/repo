@@ -24,7 +24,7 @@ function pkg.binary()
 			exec(
 				"cd "
 					.. path
-					.. " && mkdir -p usr/bin usr/lib usr/lib64 home var/spool/main var/www root proc sys var/cache var/db var/tmp srv boot mnt opt media run"
+					.. " && mkdir -p usr/bin usr/lib usr/lib64 home var/spool/main var/www root proc sys var/cache var/db var/tmp srv boot mnt opt media run etc"
 			)
 			exec("cd " .. path .. " && ln -s usr/bin bin")
 			exec("cd " .. path .. " && ln -s usr/bin sbin")
