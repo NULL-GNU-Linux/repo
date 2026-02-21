@@ -74,12 +74,12 @@ function pkg.binary()
 		hook("install")(function()
 			local path = CONFIG.TEMP_INSTALL_PATH .. "/" .. pkg.name
 			exec("mkdir -p " .. path .. "/usr/")
-			install({ "bin", path .. "/usr/" }, "cp -rP")
-			install({ "lib", path .. "/usr/" }, "cp -rP")
-			install({ "libexec", path .. "/usr/" }, "cp -rP")
-			install({ "include", path .. "/usr/" }, "cp -rP")
-			install({ "share", path .. "/usr/" }, "cp -rP")
-			install({ "*-linux-musl", path .. "/usr/" }, "cp -rP")
+			install({ "bin", path .. "/usr/" }, "cp -r")
+			install({ "lib", path .. "/usr/" }, "cp -r")
+			install({ "libexec", path .. "/usr/" }, "cp -r")
+			install({ "include", path .. "/usr/" }, "cp -r")
+			install({ "share", path .. "/usr/" }, "cp -r")
+			install({ "*-linux-musl", path .. "/usr/" }, "cp -r")
 		end)
 	end
 end
