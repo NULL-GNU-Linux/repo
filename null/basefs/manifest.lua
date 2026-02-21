@@ -17,7 +17,7 @@ pkg.sources = {
 	},
 }
 
-function install()
+function basefs()
 	local path = CONFIG.TEMP_INSTALL_PATH .. "/" .. pkg.name
 	exec(
 		"cd "
@@ -38,7 +38,7 @@ end
 function pkg.binary()
 	return function(hook)
 		hook("install")(function()
-			install()
+			basefs()
 		end)
 	end
 end
@@ -46,7 +46,7 @@ end
 function pkg.source()
 	return function(hook)
 		hook("install")(function()
-			install()
+			basefs()
 		end)
 	end
 end
