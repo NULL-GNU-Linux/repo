@@ -46,7 +46,7 @@ pkg.sources = {
 function pkg.source()
 	return function(hook)
 		hook("prepare")(function()
-			local configure_opts = { "--prefix=/usr" }
+			local configure_opts = { "--prefix=/usr", "--syslibdir=/usr" }
 			if OPTIONS.disable_static then
 				table.insert(configure_opts, "--disable-static")
 			end
@@ -60,7 +60,7 @@ function pkg.source()
 		end)
 
 		hook("build")(function()
-			make({ "syslibdir=/usr/lib" })
+			make()
 		end)
 
 		hook("install")(function()
