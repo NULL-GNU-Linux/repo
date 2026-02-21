@@ -49,6 +49,16 @@ pkg = {
 			default = false,
 			description = "use default busybox configuration",
 		},
+		no_symlinks = {
+			type = "boolean",
+			default = false,
+			description = "disables creating symlinks for busybox applets",
+		},
+		compiler = {
+			type = "string",
+			default = "gcc",
+			description = "program to compile busybox with",
+		},
 	},
 }
 pkg.sources = {
@@ -86,8 +96,12 @@ function pkg.source()
 						make({ "oldconfig" })
 					end
 				else
-					curl("https://raw.githubusercontent.com/NULL-GNU-Linux/busybox/refs/heads/main/" .. pkg.version, ".config", {"-fsSL"})
-					make({ "oldconfig" }, true, nil, "yes \"\" |")
+					curl(
+						"https://raw.githubusercontent.com/NULL-GNU-Linux/busybox/refs/heads/main/" .. pkg.version,
+						".config",
+						{ "-fsSL" }
+					)
+					make({ "oldconfig" }, true, nil, 'yes "" |')
 				end
 			elseif OPTIONS.defconfig or (not OPTIONS.menuconfig and not OPTIONS.oldconfig) then
 				make({ "defconfig" })
@@ -95,13 +109,25 @@ function pkg.source()
 			if OPTIONS.menuconfig then
 				make({ "menuconfig" })
 			end
-			make()
+			make({ "CC=" .. OPTIONS.compiler })
 		end)
 
 		hook("install")(function()
 			local path = CONFIG.TEMP_INSTALL_PATH .. "/" .. pkg.name
 			exec("mkdir -p " .. path .. "/usr/bin/")
 			install({ "busybox", "--target-directory=" .. path .. "/usr/bin/" })
+			if not OPTIONS.no_symlinks then
+				exec(
+					path
+						.. "/usr/bin/busybox --list | grep -xv 'busybox' | grep -xv 'ar' | grep -xv 'strings' | while read applet; do "
+						.. "[ ! -e '"
+						.. path
+						.. "/usr/bin/$applet' ] && ln -s /usr/bin/busybox \""
+						.. path
+						.. '/usr/bin/$applet" || true; '
+						.. "done"
+				)
+			end
 		end)
 
 		hook("post_install")(function()
