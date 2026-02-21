@@ -15,6 +15,10 @@ pkg.sources = {
 		type = "git",
 		url = "https://github.com/NULL-GNU-Linux/basefs",
 	},
+	source = {
+		type = "git",
+		url = "https://github.com/NULL-GNU-Linux/basefs",
+	},
 }
 
 function basefs()
