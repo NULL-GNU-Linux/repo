@@ -146,6 +146,18 @@ function pkg.binary()
 			local path = CONFIG.TEMP_INSTALL_PATH .. "/" .. pkg.name
 			exec("mkdir -p " .. path .. "/usr/bin/")
 			install({ "busybox", "--target-directory=" .. path .. "/usr/bin/" })
+			if not OPTIONS.no_symlinks then
+				exec(
+					path
+						.. "/usr/bin/busybox --list | grep -xv 'busybox' | grep -xv 'ar' | grep -xv 'strings' | while read applet; do "
+						.. "[ ! -e '"
+						.. path
+						.. "/usr/bin/$applet' ] && ln -s /usr/bin/busybox \""
+						.. path
+						.. '/usr/bin/$applet" || true; '
+						.. "done"
+				)
+			end
 		end)
 
 		hook("post_install")(function()
