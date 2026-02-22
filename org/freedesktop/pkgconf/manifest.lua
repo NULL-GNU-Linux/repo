@@ -1,13 +1,13 @@
 pkg = {
 	name = "org.freedesktop.pkgconf",
 	version = "2.5.1",
-	description = "musl is lightweight, fast, simple, free, and strives to be correct in the sense of standards-conformance and safety.",
+	description = "A helper tool used when compiling applications and libraries.",
 	maintainer = "NEOAPPS <neo@obsidianos.xyz>",
 	license = "GPL-2.0",
 	homepage = "https://musl.libc.org",
 	depends = {},
 	conflicts = {},
-	provides = { "pkgconf", "pkg-config", "pkgconfig" },
+	provides = { "pkgconf", "pkg-config", "pkgconfig", "pkg-conf" },
 	options = {
 		config = {
 			type = "string",
