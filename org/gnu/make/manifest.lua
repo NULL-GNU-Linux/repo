@@ -40,7 +40,7 @@ pkg.sources = {
 function pkg.source()
 	return function(hook)
 		hook("prepare")(function()
-			local configure_opts = { "--prefix=/usr" }
+			local configure_opts = { "--prefix=/usr", "--program-prefix=g" }
 			if OPTIONS.static then
 				table.insert(configure_opts, "LDFLAGS='-static'")
 			end
