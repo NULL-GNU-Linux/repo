@@ -40,7 +40,12 @@ pkg.sources = {
 function pkg.source()
 	return function(hook)
 		hook("prepare")(function()
-			local configure_opts = { "--prefix=/usr", "--program-prefix=g" }
+			local configure_opts = {
+				"--prefix=/usr",
+				"--program-prefix=g",
+				"make_cv_sys_gnu_glob=no", -- fixes GLIBC errors
+				"CFLAGS='-std=gnu89'", -- fixes GCC 14+ implicit issues
+			}
 			if OPTIONS.static then
 				table.insert(configure_opts, "LDFLAGS='-static'")
 			end
