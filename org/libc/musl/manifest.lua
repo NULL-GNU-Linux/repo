@@ -56,6 +56,8 @@ function pkg.source()
 			if OPTIONS.disable_shared then
 				table.insert(configure_opts, "--disable-shared")
 			end
+			local configg = OPTIONS.config or ""
+			table.insert(configure_opts, configg)
 			configure(configure_opts)
 		end)
 
