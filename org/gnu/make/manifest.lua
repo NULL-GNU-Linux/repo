@@ -35,7 +35,6 @@ pkg.sources = {
 	binary = {
 		type = "tar",
 		url = "https://files.obsidianos.xyz/~neo/null/" .. ARCH .. "-gnu-make.tar.gz",
-		args = "--strip-components=1",
 	},
 }
 function pkg.source()
@@ -72,10 +71,8 @@ function pkg.binary()
 	return function(hook)
 		hook("install")(function()
 			local path = CONFIG.TEMP_INSTALL_PATH .. "/" .. pkg.name
-			exec("mkdir -p " .. path .. "/usr/bin " .. path .. "/usr/share")
-			install({ "bin", path .. "/usr/" }, "cp -r")
-			install({ "include", path .. "/usr/" }, "cp -r")
-			install({ "share", path .. "/usr/" }, "cp -r")
+			exec("mkdir -p " .. path .. "/usr/")
+			install({ "usr/*", path .. "/usr/" }, "cp -r")
 		end)
 	end
 end
