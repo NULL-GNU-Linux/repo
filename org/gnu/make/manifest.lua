@@ -73,6 +73,7 @@ function pkg.binary()
 			local path = CONFIG.TEMP_INSTALL_PATH .. "/" .. pkg.name
 			exec("mkdir -p " .. path .. "/usr/bin " .. path .. "/usr/share")
 			install({ "bin", path .. "/usr/" }, "cp -r")
+			install({ "include", path .. "/usr/" }, "cp -r")
 			install({ "share", path .. "/usr/" }, "cp -r")
 		end)
 	end
