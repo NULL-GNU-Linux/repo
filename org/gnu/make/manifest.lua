@@ -35,6 +35,7 @@ pkg.sources = {
 	binary = {
 		type = "tar",
 		url = "https://files.obsidianos.xyz/~neo/null/" .. ARCH .. "-gnu-make.tar.gz",
+		args = "--strip-components=1",
 	},
 }
 function pkg.source()
