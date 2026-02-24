@@ -53,7 +53,7 @@ function pkg.source()
 		end)
 
 		hook("build")(function()
-			configure({}, "sh build.sh")
+			configure({}, "build.sh")
 		end)
 
 		hook("install")(function()
