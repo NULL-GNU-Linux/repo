@@ -26,11 +26,12 @@ function pkg.source()
 		hook("build")(function()
 			local path = CONFIG.TEMP_INSTALL_PATH .. "/" .. pkg.name
 			exec("mkdir -p " .. path .. "/usr/")
-			make({ "CMAKE_BUILD_TYPE=RelWithDebInfo" })
+			make({ "CMAKE_BUILD_TYPE=RelWithDebInfo", "CMAKE_INSTALL_PREFIX=/usr" })
 		end)
 
 		hook("install")(function()
-			make({}, false)
+			local path = CONFIG.TEMP_INSTALL_PATH .. "/" .. pkg.name
+			make({ "CMAKE_INSTALL_PREFIX=/usr" }, false)
 		end)
 	end
 end
