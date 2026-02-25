@@ -17,7 +17,11 @@ pkg.sources = {
 	},
 	binary = {
 		type = "tar",
-		url = "https://github.com/neovim/neovim/releases/v" .. pkg.version .. "/nvim-linux-" .. ARCH .. ".tar.gz",
+		url = "https://github.com/neovim/neovim/releases/download/v"
+			.. pkg.version
+			.. "/nvim-linux-"
+			.. ARCH
+			.. ".tar.gz",
 		args = "--strip-components=1",
 	},
 }
