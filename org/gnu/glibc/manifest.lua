@@ -29,7 +29,7 @@ pkg = {
 pkg.sources = {
 	source = {
 		type = "tar",
-		url = "https://github.com/bminor/glibc/archive/refs/tags/glibc-" .. pkg.version .. ".tar.gz",
+		url = "https://mirrors.dotsrc.org/gnu/glibc/glibc-"..pkg.version..".tar.xz",
 		args = "--strip-components=1",
 	},
 	binary = {
