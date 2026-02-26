@@ -18,6 +18,7 @@ pkg.sources = {
 	binary = {
 		type = "tar",
 		url = "https://archlinux.org/packages/core/x86_64/popt/download/",
+        filename = "popt.tar.gz"
 	},
 }
 function pkg.source()
