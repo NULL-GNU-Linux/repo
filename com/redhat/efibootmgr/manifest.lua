@@ -17,7 +17,7 @@ pkg.sources = {
 	},
 	binary = {
 		type = "tar",
-		url = "https://archlinux.org/packages/core/x86_64/efibootmgr/download/",
+		url = "https://archlinux.org/packages/core/x86_64/efibootmgr/download",
 	},
 }
 function pkg.source()

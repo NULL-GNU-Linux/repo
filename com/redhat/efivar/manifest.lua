@@ -17,7 +17,7 @@ pkg.sources = {
 	},
 	binary = {
 		type = "tar",
-		url = "https://archlinux.org/packages/core/x86_64/efivar/download/",
+		url = "https://archlinux.org/packages/core/x86_64/efivar/download",
 	},
 }
 function pkg.source()
