@@ -46,7 +46,7 @@ function pkg.source()
 	return function(hook)
 		hook("prepare")(function()
 		    exec("./autogen.sh")
-			local configure_opts = { "--prefix=/usr", "CFLAGS='-Wno-error=implicit-function-declaration'", "CC='gcc -std=gnu11'" }
+			local configure_opts = { "--prefix=/usr", "CFLAGS='-Wno-error=implicit-function-declaration -include stdio.h -include stdlib.h -Wno-error'", "CC='gcc -std=gnu11'" }
 			if OPTIONS.disable_static then
 				table.insert(configure_opts, "--disable-static")
 			end
