@@ -24,7 +24,7 @@ pkg.sources = {
 function basefs()
 	local path = CONFIG.TEMP_INSTALL_PATH .. "/" .. pkg.name
 	exec(
-		"mkdir -p usr/bin usr/lib usr/local/bin usr/local/lib usr/local/share opt/bin usr/lib64 home var/spool/main var/www root proc sys var/cache var/db var/tmp srv boot mnt opt media run etc"
+		"mkdir -p usr/bin usr/lib usr/local/bin usr/local/lib usr/local/share opt/bin usr/lib64 home var/spool/main var/www root proc sys var/cache var/db var/tmp srv boot efi/EFI mnt opt media run etc"
 	)
 	exec("ln -s usr/bin bin")
 	exec("ln -s usr/local/bin usr/local/sbin")
