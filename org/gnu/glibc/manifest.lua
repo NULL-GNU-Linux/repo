@@ -51,15 +51,16 @@ function pkg.source()
 			end
 			local configg = OPTIONS.config or ""
 			table.insert(configure_opts, configg)
-			configure(configure_opts)
+            exec("mkdir -p build")
+			configure(configure_opts, "configure || cd build && ../configure")
 		end)
 
 		hook("build")(function()
-            make()
+            make({}, true, nil, "cd build &&")
 		end)
 
 		hook("install")(function()
-			make({}, false)
+			make({}, false, nil, "cd build &&")
 		end)
 	end
 end
