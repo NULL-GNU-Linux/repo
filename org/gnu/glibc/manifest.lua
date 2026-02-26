@@ -65,7 +65,8 @@ function pkg.source()
             exec("cd "..path.." && mkdir -p usr/lib64 usr/bin")
             exec("cd "..path.." && mv lib64/* usr/lib64/")
             exec("cd "..path.." && mv sbin/* usr/bin/")
-            exec("cd "..path.." && rm -rf sbin lib64")
+            exec("cd "..path.." && mv usr/sbin/* usr/bin/")
+            exec("cd "..path.." && rm -rf sbin lib64 usr/sbin")
 		end)
 	end
 end
