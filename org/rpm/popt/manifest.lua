@@ -23,7 +23,11 @@ pkg.sources = {
 function pkg.source()
 	return function(hook)
         hook("prepare")(function()
-            configure({"--prefix=/usr"})
+            configure(
+                {
+                    "--prefix=/usr",
+                    "CFLAGS='-std=gnu89'" -- GCC14 Fix
+                })
         end)
         hook("build")(function()
 			make()
