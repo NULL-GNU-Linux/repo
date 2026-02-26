@@ -23,16 +23,17 @@ pkg.sources = {
 
 function basefs()
 	local path = CONFIG.TEMP_INSTALL_PATH .. "/" .. pkg.name
+    local cdpath = "cd " .. path .. " && "
 	exec(
-		"mkdir -p usr/bin usr/lib usr/local/bin usr/local/lib usr/local/share opt/bin usr/lib64 home var/spool/main var/www root proc sys var/cache var/db var/tmp srv boot efi/EFI mnt opt media run etc"
+		cdpath .. " && mkdir -p usr/bin usr/lib usr/local/bin usr/local/lib usr/local/share opt/bin usr/lib64 home var/spool/main var/www root proc sys var/cache var/db var/tmp srv boot efi/EFI mnt opt media run etc"
 	)
-	exec("ln -s usr/bin bin")
-	exec("ln -s usr/local/bin usr/local/sbin")
-	exec("ln -s usr/bin sbin")
-	exec("ln -s usr/lib lib")
-	exec("ln -s usr/lib64 lib64")
-	exec("ln -s usr/bin usr/sbin")
-	exec("ln -s var/tmp tmp")
+	exec(cdpath.."ln -s usr/bin bin")
+	exec(cdpath.."ln -s usr/local/bin usr/local/sbin")
+	exec(cdpath.."ln -s usr/bin sbin")
+	exec(cdpath.."ln -s usr/lib lib")
+	exec(cdpath.."ln -s usr/lib64 lib64")
+	exec(cdpath.."ln -s usr/bin usr/sbin")
+	exec(cdpath.."ln -s var/tmp tmp")
 	install({ "env.d", path .. "/etc/" }, "cp -r")
 	install({ "passwd", "-m 644", "--target-directory=" .. path .. "/etc/" })
 	install({ "shadow", "-m 644", "--target-directory=" .. path .. "/etc/" })

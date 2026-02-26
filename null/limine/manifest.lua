@@ -75,7 +75,7 @@ function pkg.binary()
 	return function(hook)
 		hook("install")(function()
 			local path = CONFIG.TEMP_INSTALL_PATH .. "/" .. pkg.name
-			exec("mkdir -p usr/bin/ usr/lib/limine usr/share/limine usr/include")
+			exec("cd " .. path .. " && mkdir -p usr/bin/ usr/lib/limine usr/share/limine usr/include")
             exec("make") -- no need for pkglet's specific make()
             install({"limine", "--target-directory="..path.."/usr/bin/"})
             if OPTIONS.uefi then
