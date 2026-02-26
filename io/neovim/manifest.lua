@@ -1,7 +1,7 @@
 pkg = {
 	name = "io.neovim",
 	version = "0.11.6",
-	description = "Hyprextendable Vim-based text editor.",
+	description = "Hyperextensible Vim-based text editor.",
 	maintainer = "NEOAPPS <neo@obsidianos.xyz>",
 	license = "Apache-2.0",
 	homepage = "https://neovim.io",
@@ -28,8 +28,7 @@ pkg.sources = {
 function pkg.source()
 	return function(hook)
 		hook("build")(function()
-			local path = CONFIG.TEMP_INSTALL_PATH .. "/" .. pkg.name
-			exec("mkdir -p " .. path .. "/usr/")
+			exec("mkdir -p usr/")
 			make({ "CMAKE_BUILD_TYPE=RelWithDebInfo", "CMAKE_INSTALL_PREFIX=/usr" })
 		end)
 
@@ -44,7 +43,7 @@ function pkg.binary()
 	return function(hook)
 		hook("install")(function()
 			local path = CONFIG.TEMP_INSTALL_PATH .. "/" .. pkg.name
-			exec("mkdir -p " .. path .. "/usr/")
+			exec("mkdir -p usr/")
 			install({ "bin", path .. "/usr/" }, "cp -r")
 			install({ "lib", path .. "/usr/" }, "cp -r")
 			install({ "share", path .. "/usr/" }, "cp -r")

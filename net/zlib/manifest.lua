@@ -56,7 +56,8 @@ end
 function pkg.binary()
 	return function(hook)
 		hook("install")(function()
-			exec("tar -xf zlib-" .. pkg.version .. "-linux-x86_64.tar.xz -C " .. ROOT .. "/usr")
+            local path = CONFIG.TEMP_INSTALL_PATH .. "/" .. pkg.name
+			exec("tar -xf zlib-" .. pkg.version .. "-linux-x86_64.tar.xz -C " .. path .. "/usr")
 		end)
 	end
 end

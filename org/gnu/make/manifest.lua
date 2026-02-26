@@ -58,7 +58,7 @@ function pkg.source()
 		end)
 
 		hook("build")(function()
-			configure({}, "build.sh")
+			exec("sh build.sh")
 		end)
 
 		hook("install")(function()
