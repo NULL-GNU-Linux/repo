@@ -46,7 +46,7 @@ function pkg.source()
 	return function(hook)
 		hook("prepare")(function()
 		    exec("./autogen.sh")
-			local configure_opts = { "--prefix=/usr" }
+			local configure_opts = { "--prefix=/usr", "CFLAGS='-std=gnu89'" }
 			if OPTIONS.disable_static then
 				table.insert(configure_opts, "--disable-static")
 			end
