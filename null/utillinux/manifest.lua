@@ -46,7 +46,7 @@ function pkg.source()
 	return function(hook)
 		hook("prepare")(function()
 		    exec("./autogen.sh")
-			local configure_opts = { "--prefix=/usr", "ac_cv_func_rpmatch=yes", "ac_cv_func_reallocarray=yes", "CFLAGS='-Wno-error=implicit-function-declaration -Wno-error=implicit-int -Wno-error=declaration-missing-parameter-type -include stdio.h -include stdlib.h -Wno-error -D_GNU_SOURCE'", "CC='gcc -std=gnu11'" }
+			local configure_opts = { "--prefix=/usr", "CFLAGS='-Wno-error=implicit-function-declaration -D_GNU_SOURCE'", "CC='gcc -std=gnu11'" }
 			if OPTIONS.disable_static then
 				table.insert(configure_opts, "--disable-static")
 			end
