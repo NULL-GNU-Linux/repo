@@ -23,7 +23,7 @@ pkg = {
             type = "boolean",
             default = true,
             description = "enables UEFI support"
-        }
+        },
         all = {
             type = "boolean",
             default = false,
