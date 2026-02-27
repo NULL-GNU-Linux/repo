@@ -113,17 +113,16 @@ function pkg.source()
 		end)
 
 		hook("install")(function()
-			local path = CONFIG.TEMP_INSTALL_PATH .. "/" .. pkg.name
-			exec("mkdir -p " .. path .. "/usr/bin/")
-			install({ "busybox", "--target-directory=" .. path .. "/usr/bin/" })
+			exec("mkdir -p " .. INSTALL .. "/usr/bin/")
+			install({ "busybox", "--target-directory=" .. INSTALL .. "/usr/bin/" })
 			if not OPTIONS.no_symlinks then
 				exec(
-					path
+				    INSTALL
 						.. "/usr/bin/busybox --list | grep -xv 'busybox' | grep -xv 'ar' | grep -xv 'strings' | while read applet; do "
 						.. "[ ! -e '"
-						.. path
+						.. INSTALL
 						.. "/usr/bin/$applet' ] && ln -s /usr/bin/busybox \""
-						.. path
+						.. INSTALL
 						.. '/usr/bin/$applet" || true; '
 						.. "done"
 				)
@@ -143,17 +142,16 @@ function pkg.binary()
 		end)
 
 		hook("install")(function()
-			local path = CONFIG.TEMP_INSTALL_PATH .. "/" .. pkg.name
-			exec("mkdir -p " .. path .. "/usr/bin/")
-			install({ "busybox", "--target-directory=" .. path .. "/usr/bin/" })
+			exec("mkdir -p " .. INSTALL .. "/usr/bin/")
+			install({ "busybox", "--target-directory=" .. INSTALL .. "/usr/bin/" })
 			if not OPTIONS.no_symlinks then
 				exec(
-					path
+				    INSTALL
 						.. "/usr/bin/busybox --list | grep -xv 'busybox' | grep -xv 'ar' | grep -xv 'strings' | while read applet; do "
 						.. "[ ! -e '"
-						.. path
+						.. INSTALL
 						.. "/usr/bin/$applet' ] && ln -s /usr/bin/busybox \""
-						.. path
+						.. INSTALL
 						.. '/usr/bin/$applet" || true; '
 						.. "done"
 				)

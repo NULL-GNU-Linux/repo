@@ -74,18 +74,17 @@ end
 function pkg.binary()
 	return function(hook)
 		hook("install")(function()
-			local path = CONFIG.TEMP_INSTALL_PATH .. "/" .. pkg.name
-			exec("cd " .. path .. " && mkdir -p usr/bin/ usr/lib/limine usr/share/limine usr/include")
+			exec("cd " .. INSTALL .. " && mkdir -p usr/bin/ usr/lib/limine usr/share/limine usr/include")
             exec("make") -- no need for pkglet's specific make()
-            install({"limine", "--target-directory="..path.."/usr/bin/"})
+            install({"limine", "--target-directory="..INSTALL.."/usr/bin/"})
             if OPTIONS.uefi then
-                install({"BOOT*.EFI", "--target-directory="..path.."/usr/share/limine/"})
+                install({"BOOT*.EFI", "--target-directory="..INSTALL.."/usr/share/limine/"})
             end
             if OPTIONS.bios then
-                install({"limine-bios-*.bin", "--target-directory="..path.."/usr/lib/limine/"})
-                install({"*.sys", "--target-directory="..path.."/usr/lib/limine/"})
-                install({"*.sys", "--target-directory="..path.."/boot/"})
-                install({"*.h", "--target-directory="..path.."/usr/include/"})
+                install({"limine-bios-*.bin", "--target-directory="..INSTALL.."/usr/lib/limine/"})
+                install({"*.sys", "--target-directory="..INSTALL.."/usr/lib/limine/"})
+                install({"*.sys", "--target-directory="..INSTALL.."/boot/"})
+                install({"*.h", "--target-directory="..INSTALL.."/usr/include/"})
             end
 		end)
 	end

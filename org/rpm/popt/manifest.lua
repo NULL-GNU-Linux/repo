@@ -34,10 +34,9 @@ function pkg.source()
 		end)
 
 		hook("install")(function()
-            local path = CONFIG.TEMP_INSTALL_PATH .. "/" .. pkg.name
 			make({}, false)
-            exec("mkdir -p " .. path .. "usr/share/licenses/popt")
-            install({"-Dm 644", "COPYING", path.."usr/share/licenses/popt/LICENSE"})
+            exec("mkdir -p " .. INSTALL .. "/usr/share/licenses/popt")
+            install({"-Dm 644", "COPYING", INSTALL.."/usr/share/licenses/popt/LICENSE"})
 		end)
 	end
 end
@@ -45,9 +44,8 @@ end
 function pkg.binary()
 	return function(hook)
 		hook("install")(function()
-			local path = CONFIG.TEMP_INSTALL_PATH .. "/" .. pkg.name
-            exec("cd "..path.." && mkdir -p usr")
-            install({"usr/*", path .. "/usr/"}, "cp -r")
+            exec("cd "..INSTALL.." && mkdir -p usr")
+            install({"usr/*", INSTALL .. "/usr/"}, "cp -r")
 		end)
 	end
 end

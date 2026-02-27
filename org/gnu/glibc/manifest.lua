@@ -60,13 +60,12 @@ function pkg.source()
 		end)
 
 		hook("install")(function()
-			local path = CONFIG.TEMP_INSTALL_PATH .. "/" .. pkg.name
 			make({}, false, nil, "cd build &&")
-            exec("cd "..path.." && mkdir -p usr/lib64 usr/bin")
-            exec("cd "..path.." && mv lib64/* usr/lib64/")
-            exec("cd "..path.." && mv sbin/* usr/bin/")
-            exec("cd "..path.." && mv usr/sbin/* usr/bin/")
-            exec("cd "..path.." && rm -rf sbin lib64 usr/sbin")
+            exec("cd "..INSTALL.." && mkdir -p usr/lib64 usr/bin")
+            exec("cd "..INSTALL.." && mv lib64/* usr/lib64/")
+            exec("cd "..INSTALL.." && mv sbin/* usr/bin/")
+            exec("cd "..INSTALL.." && mv usr/sbin/* usr/bin/")
+            exec("cd "..INSTALL.." && rm -rf sbin lib64 usr/sbin")
 		end)
 	end
 end
@@ -74,8 +73,7 @@ end
 function pkg.binary()
 	return function(hook)
 		hook("install")(function()
-			local path = CONFIG.TEMP_INSTALL_PATH .. "/" .. pkg.name
-			install({ "*", path }, "cp -r")
+			install({ "*", INSTALL }, "cp -r")
 		end)
 	end
 end

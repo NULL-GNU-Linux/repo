@@ -33,7 +33,6 @@ function pkg.source()
 		end)
 
 		hook("install")(function()
-			local path = CONFIG.TEMP_INSTALL_PATH .. "/" .. pkg.name
 			make({ "CMAKE_INSTALL_PREFIX=/usr" }, false)
 		end)
 	end
@@ -42,11 +41,10 @@ end
 function pkg.binary()
 	return function(hook)
 		hook("install")(function()
-			local path = CONFIG.TEMP_INSTALL_PATH .. "/" .. pkg.name
 			exec("mkdir -p usr/")
-			install({ "bin", path .. "/usr/" }, "cp -r")
-			install({ "lib", path .. "/usr/" }, "cp -r")
-			install({ "share", path .. "/usr/" }, "cp -r")
+			install({ "bin", INSTALL .. "/usr/" }, "cp -r")
+			install({ "lib", INSTALL .. "/usr/" }, "cp -r")
+			install({ "share", INSTALL .. "/usr/" }, "cp -r")
 		end)
 	end
 end

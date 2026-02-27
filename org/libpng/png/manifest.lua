@@ -64,7 +64,7 @@ end
 function pkg.binary()
 	return function(hook)
 		hook("install")(function()
-			exec("tar -xf libpng-" .. pkg.version .. "-linux-x86_64.tar.xz -C " .. ROOT .. "usr")
+			exec("tar -xf libpng-" .. pkg.version .. "-linux-x86_64.tar.xz -C " .. INSTALL .. "/usr")
 		end)
 	end
 end

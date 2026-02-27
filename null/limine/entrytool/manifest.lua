@@ -19,9 +19,8 @@ pkg.sources = {
 function pkg.binary()
 	return function(hook)
 		hook("install")(function()
-			local path = CONFIG.TEMP_INSTALL_PATH .. "/" .. pkg.name
-            exec("cp -r usr " .. path)
-            exec("cp -r etc " .. path)
+            exec("cp -r usr " .. INSTALL)
+            exec("cp -r etc " .. INSTALL)
 		end)
 	end
 end

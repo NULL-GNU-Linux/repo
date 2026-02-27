@@ -55,8 +55,7 @@ end
 function pkg.binary()
 	return function(hook)
 		hook("install")(function()
-			local path = CONFIG.TEMP_INSTALL_PATH .. "/" .. pkg.name
-			install({ "*", path .. "/" }, "cp -r")
+			install({ "*", INSTALL .. "/" }, "cp -r")
 		end)
 	end
 end

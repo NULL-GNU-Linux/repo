@@ -27,12 +27,11 @@ function pkg.source()
 		end)
 
 		hook("install")(function()
-            local path = CONFIG.TEMP_INSTALL_PATH .. "/" .. pkg.name
 			make({"libdir=/usr/lib/", "sbindir=/usr/bin/", "EFIDIR=null"}, false)
-            install({"-Dm 644", "README.md", "--target-directory="..path.."usr/share/doc/efibootmgr/"})
-            install({"-Dm 644", "TODO", "--target-directory="..path.."usr/share/doc/efibootmgr/"})
-            install({"-Dm 644", "AUTHORS", "--target-directory="..path.."usr/share/doc/efibootmgr/"})
-            install({"-Dm 644", "README", "--target-directory="..path.."usr/share/doc/efibootmgr/"})
+            install({"-Dm 644", "README.md", "--target-directory="..INSTALL.."usr/share/doc/efibootmgr/"})
+            install({"-Dm 644", "TODO", "--target-directory="..INSTALL.."usr/share/doc/efibootmgr/"})
+            install({"-Dm 644", "AUTHORS", "--target-directory="..INSTALL.."usr/share/doc/efibootmgr/"})
+            install({"-Dm 644", "README", "--target-directory="..INSTALL.."usr/share/doc/efibootmgr/"})
 		end)
 	end
 end
@@ -40,9 +39,8 @@ end
 function pkg.binary()
 	return function(hook)
 		hook("install")(function()
-			local path = CONFIG.TEMP_INSTALL_PATH .. "/" .. pkg.name
-            exec("cd "..path.." && mkdir -p usr")
-            install({"usr/*", path .. "/usr/"}, "cp -r")
+            exec("cd "..INSTALL.." && mkdir -p usr")
+            install({"usr/*", INSTALL .. "/usr/"}, "cp -r")
 		end)
 	end
 end

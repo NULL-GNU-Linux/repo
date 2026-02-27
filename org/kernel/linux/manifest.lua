@@ -69,12 +69,12 @@ function pkg.source()
 		end)
 
 		hook("install")(function()
-			make({ "INSTALL_PATH=" .. CONFIG.TEMP_INSTALL_PATH .. "/" .. pkg.name .. "/boot", "install" })
+			make({ "INSTALL_PATH=" .. INSTALL .. "/boot", "install" })
 			if not OPTIONS.no_modules then
-				make({ "INSTALL_MOD_PATH=" .. CONFIG.TEMP_INSTALL_PATH .. "/" .. pkg.name .. "/usr", "modules_install" })
+				make({ "INSTALL_MOD_PATH=" ..INSTALL .. "/usr", "modules_install" })
 			end
 			if not OPTIONS.no_headers then
-			    make({"headers_install", "ARCH=" .. ARCH, "INSTALL_HDR_PATH=" .. CONFIG.TEMP_INSTALL_PATH .. "/" .. pkg.name .. "/usr"})
+			    make({"headers_install", "ARCH=" .. ARCH, "INSTALL_HDR_PATH=" .. INSTALL .. "/usr"})
 			end
 		end)
 
@@ -87,29 +87,28 @@ end
 function pkg.binary()
 	return function(hook)
 		hook("install")(function()
-		    local path = CONFIG.TEMP_INSTALL_PATH .. "/" .. pkg.name
-			exec("mkdir -p " .. path .. "/usr")
-			exec("mkdir -p " .. path .. "/boot")
+			exec("mkdir -p " .. INSTALL .. "/usr")
+			exec("mkdir -p " .. INSTALL .. "/boot")
 			if not OPTIONS.no_modules then
-			   local ok, result = pcall(function() install({ "lib", path .. "/usr/" }, "cp -r") end)
+			   local ok, result = pcall(function() install({ "lib", INSTALL .. "/usr/" }, "cp -r") end)
 			   if not ok then
-					install({"usr/lib", path}, "cp -r")
+					install({"usr/lib", INSTALL}, "cp -r")
 			   end
 			end
 			if not OPTIONS.no_headers then
-			    install({ "usr/include", path .. "/usr/include" }, "cp -r")
+			    install({ "usr/include", INSTALL .. "/usr/include" }, "cp -r")
 			end
-			local ok1, result = pcall(function() install({ "vmlinuz-" .. pkg.version .. "-null", "--target-directory=" .. path .. "/boot" }) end)
+			local ok1, result = pcall(function() install({ "vmlinuz-" .. pkg.version .. "-null", "--target-directory=" .. INSTALL .. "/boot" }) end)
 			if not ok1 then
-			    install({ "boot/vmlinuz-" .. pkg.version .. "-null", "--target-directory=" .. path .. "/boot" })
+			    install({ "boot/vmlinuz-" .. pkg.version .. "-null", "--target-directory=" .. INSTALL .. "/boot" })
 			end
-			local ok2, result = pcall(function() install({ "config-" .. pkg.version .. "-null", "--target-directory=" .. path .. "/boot" }) end)
+			local ok2, result = pcall(function() install({ "config-" .. pkg.version .. "-null", "--target-directory=" .. INSTALL .. "/boot" }) end)
 			if not ok2 then
-			    install({ "config-" .. pkg.version .. "-null", "--target-directory=" .. path .. "/boot" })
+			    install({ "config-" .. pkg.version .. "-null", "--target-directory=" .. INSTALL .. "/boot" })
 			end
-			local ok3, result = pcall(function() install({ "System.map-" .. pkg.version .. "-null", "--target-directory=" .. path .. "/boot" }) end)
+			local ok3, result = pcall(function() install({ "System.map-" .. pkg.version .. "-null", "--target-directory=" .. INSTALL .. "/boot" }) end)
 			if not ok3 then
-			    install({ "System.map-" .. pkg.version .. "-null", "--target-directory=" .. path .. "/boot" })
+			    install({ "System.map-" .. pkg.version .. "-null", "--target-directory=" .. INSTALL .. "/boot" })
 			end
 		end)
 	end
