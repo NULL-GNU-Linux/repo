@@ -30,6 +30,7 @@ pkg.sources = {
 function pkg.source()
 	return function(hook)
 		hook("prepare")(function()
+            exec("mkdir -p build")
             exec("sed -i 's/char [*]q/const &/' libgomp/affinity-fmt.c") -- for glibc >=2.43
             if ARCH == "x86_64" then
                 exec("sed -e '/m64=/s/lib64/lib/' -i.orig gcc/config/i386/t-linux64")
@@ -47,7 +48,7 @@ function pkg.source()
 			}
 			local configg = OPTIONS.config or ""
 			table.insert(configure_opts, configg)
-			configure(configure_opts, "configure --fail-please || cd build && ./configure ")
+			configure(configure_opts, "configure --fail-please || cd build && ../configure ")
 		end)
 
 		hook("build")(function()
