@@ -1,7 +1,7 @@
 pkg = {
 	name = "com.git-scm.git",
 	version = "2.51.0",
-	description = "A free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency.",
+	description = "A free and open source distributed version control system",
 	maintainer = "NEOAPPS <neo@obsidianos.xyz>",
 	license = "GPL-2.0",
 	homepage = "https://git-scm.com",
