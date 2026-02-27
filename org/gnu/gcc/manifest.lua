@@ -37,12 +37,15 @@ function pkg.source()
             end
 			local configure_opts = {
 				"--prefix=/usr",
+                "--libdir=/usr/lib64",
+                "--disable-multilib",
                 "--with-system-zlib",
                 "--enable-default-pie",
                 "--enable-default-ssp",
                 "--enable-host-pie",
                 "--disable-fixincludes",
-                "--enable-languages=c,c++,fortran,go,objc,obj-c++,m2"
+                "--enable-languages=c,c++,fortran,go,objc,obj-c++,m2",
+                "LDFLAGS='-Wl,-rpath,/lib64 -Wl,-rpath,/usr/lib64'"
 			}
 			local configg = OPTIONS.config or ""
 			table.insert(configure_opts, configg)
