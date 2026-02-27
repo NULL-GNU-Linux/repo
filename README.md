@@ -4,10 +4,13 @@ This is the main NULL GNU/Linux [pkglet](https://github.com/NULL-GNU-Linux/pkgle
 ## How to add it?
 By running the following commands that append the repo to the config and clones the repo:
 ```sh
-echo "main /var/db/pkglet/repos/main" | sudo tee /etc/pkglet/repos.conf
-sudo mkdir -p /var/db/pkglet/repos/
-sudo git config --global --add safe.directory /var/db/pkglet/repos/main
-sudo git clone https://github.com/NULL-GNU-Linux/repo /var/db/pkglet/repos/main
+# root user (recommended) 
+echo "main https://github.com/NULL-GNU-Linux/repo" | sudo tee /etc/pkglet/repos.conf
+pkglet sync
+
+# regular user
+echo "main https://github.com/NULL-GNU-Linux/repo" >> ~/.config/pkglet/repos.conf
+pkglet sync
 ```
 
 ## How to update it via pkglet?
