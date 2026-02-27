@@ -68,13 +68,7 @@ pkg.sources = {
 			url = "https://mirrors.slackware.com/slackware/slackware64-current/source/a/mkinitrd/busybox-"
 				.. pkg.version
 				.. ".tar.bz2",
-			patches = {
-				{
-					url = "https://raw.githubusercontent.com/NULL-GNU-Linux/busybox/refs/heads/main/gcc15.patch",
-					sha256sum = "e431c8cf88e7d171db9513fd2deb0a10c22bed5288e02cffd4df4dc4c5ac5502",
-					nofail = true,
-				},
-			},
+            args = "--strip-components=1"
 		},
 	},
 	binary = {
