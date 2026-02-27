@@ -32,16 +32,8 @@ function pkg.source()
 		hook("prepare")(function()
             exec("mkdir -p build")
             exec("sed -i 's/char [*]q/const &/' libgomp/affinity-fmt.c") -- for glibc >=2.43
-            if ARCH == "x86_64" then
-                exec("sed -e '/m64=/s/lib64/lib/' -i.orig gcc/config/i386/t-linux64")
-            end
 			local configure_opts = {
 				"--prefix=/usr",
-                "--libdir=/usr/lib64",
-                "--with-slibdir=/lib64",
-                "--with-native-system-header-dir=/usr/include",
-                "--x-libraries=/usr/lib64",
-                "--x-includes=/usr/include",
                 "--disable-multilib",
                 "--with-system-zlib",
                 "--enable-default-pie",
@@ -49,7 +41,6 @@ function pkg.source()
                 "--enable-host-pie",
                 "--disable-fixincludes",
                 "--enable-languages=c,c++,fortran,go,objc,obj-c++,m2",
-                "LDFLAGS='-Wl,-rpath,/lib64 -Wl,-rpath,/usr/lib64'"
 			}
 			local configg = OPTIONS.config or ""
 			table.insert(configure_opts, configg)
