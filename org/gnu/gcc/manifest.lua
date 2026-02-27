@@ -38,6 +38,10 @@ function pkg.source()
 			local configure_opts = {
 				"--prefix=/usr",
                 "--libdir=/usr/lib64",
+                "--with-slibdir=/lib64",
+                "--with-native-system-header-dir=/usr/include",
+                "--x-libraries=/usr/lib64",
+                "--x-includes=/usr/include",
                 "--disable-multilib",
                 "--with-system-zlib",
                 "--enable-default-pie",
