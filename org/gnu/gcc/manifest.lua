@@ -37,8 +37,6 @@ function pkg.source()
             end
 			local configure_opts = {
 				"--prefix=/usr",
-                "--libdir=/usr/lib64",
-                "--disable-multilib",
                 "--with-system-zlib",
                 "--enable-default-pie",
                 "--enable-default-ssp",
