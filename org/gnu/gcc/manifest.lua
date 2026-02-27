@@ -19,7 +19,7 @@ pkg = {
 pkg.sources = {
 	source = {
 		type = "tar",
-		url = "https://mirrors.dotsrc.org/gnu/gcc/gcc-"..pkg.version.."/gcc-"..pkg.version.."/.tar.xz",
+		url = "https://mirrors.dotsrc.org/gnu/gcc/gcc-"..pkg.version.."/gcc-"..pkg.version..".tar.xz",
 		args = "--strip-components=1",
 	},
 	binary = {
