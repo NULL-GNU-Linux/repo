@@ -31,8 +31,12 @@ function pkg.source()
 	return function(hook)
 		hook("prepare")(function()
             exec("sed -i 's/char [*]q/const &/' libgomp/affinity-fmt.c") -- for glibc >=2.43
+            if ARCH == "x86_64" then
+                exec("sed -e '/m64=/s/lib64/lib/' -i.orig gcc/config/i386/t-linux64")
+            end
 			local configure_opts = {
 				"--prefix=/usr",
+                "LD=ld",
                 "--disable-multilib",
                 "--with-system-zlib",
                 "--enable-default-pie",
@@ -47,11 +51,11 @@ function pkg.source()
 		end)
 
 		hook("build")(function()
-            make()
+            make({}, true, nil, "cd build &&")
 		end)
 
 		hook("install")(function()
-			make({}, false)
+			make({}, false, nil, "cd build &&")
 		end)
 	end
 end
