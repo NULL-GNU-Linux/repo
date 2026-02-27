@@ -47,7 +47,7 @@ function pkg.source()
 			}
 			local configg = OPTIONS.config or ""
 			table.insert(configure_opts, configg)
-			configure(configure_opts, "configure --fail-please || mkdir -p build && cd build && ./configure ")
+			configure(configure_opts, "configure --fail-please || cd build && ./configure ")
 		end)
 
 		hook("build")(function()
