@@ -46,7 +46,12 @@ function pkg.source()
 	return function(hook)
 		hook("prepare")(function()
 		    exec("./autogen.sh")
-			local configure_opts = { "--prefix=/usr", "CFLAGS='-Wno-error=implicit-function-declaration -D_GNU_SOURCE'", "CC='gcc -std=gnu11'" }
+			local configure_opts = { "--prefix=/usr", "--sbindir=/usr/bin", "--bindir=/usr/bin", "CFLAGS='-Wno-error=implicit-function-declaration -D_GNU_SOURCE'", "CC='gcc -std=gnu11'" }
+            if ARCH == "x86_64" or ARCH == "aarch64" then
+                table.insert(configure_opts, "--libdir=/usr/lib64")
+            else 
+                table.insert(configure_opts, "--libdir=/usr/lib")
+            end
 			if OPTIONS.disable_static then
 				table.insert(configure_opts, "--disable-static")
 			end
