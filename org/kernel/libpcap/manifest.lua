@@ -26,7 +26,11 @@ function pkg.source()
 		end)
 
 		hook("install")(function()
-			make({"prefix=/usr", "lib=lib"}, false)
+            local lib = "lib"
+            if ARCH == "x86_64" or ARCH == "aarch64" then
+                lib = "lib64"
+            end
+			make({"prefix=/usr", "lib="..lib}, false)
 		end)
 	end
 end
