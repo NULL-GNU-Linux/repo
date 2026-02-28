@@ -57,10 +57,10 @@ function pkg.source()
 
 		hook("install")(function()
 			make({}, false)
-            exec("mkdir -p "..INSTALL.."/usr/bin/ "..INSTALL.."/usr/share/grub/")
+            exec("mkdir -p "..INSTALL.."/usr/bin/ "..INSTALL.."/usr/share/bash-completion/completions/")
             install({"-m755", "grub-mount", INSTALL.."/usr/bin/"})
             install({"-m755", "grub-mkfont", INSTALL.."/usr/bin/"})
-            install({"-m644", "ascii.h", "widthspec.h", "*.pf2", INSTALL.."/usr/share/grub/"})
+            exec("mv -v /etc/bash_completion.d/grub "..INSTALL.."/usr/share/bash-completion/completions/")
 		end)
 	end
 end
