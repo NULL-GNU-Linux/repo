@@ -33,6 +33,7 @@ function pkg.source()
             exec("mkdir -p build")
 			local configure_opts = {
 				"--prefix=/usr",
+                "--enable-cxx",
 			}
 			local configg = OPTIONS.config or ""
 			table.insert(configure_opts, configg)
