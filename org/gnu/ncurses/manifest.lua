@@ -1,6 +1,6 @@
 pkg = {
 	name = "org.gnu.ncurses",
-	version = "6.5",
+	version = "6.6",
 	description = "System V Release 4.0 curses emulation library",
 	maintainer = "NEOAPPS <neo@obsidianos.xyz>",
 	license = "MIT",
@@ -34,7 +34,7 @@ pkg = {
 pkg.sources = {
 	source = {
 		type = "tar",
-		url = "https://mirrors.dotsrc.org/gnu/ncurses/ncurses-"..pkg.version..".tar.xz",
+		url = "https://mirrors.dotsrc.org/gnu/ncurses/ncurses-"..pkg.version..".tar.gz",
 		args = "--strip-components=1",
 	},
 	binary = {
