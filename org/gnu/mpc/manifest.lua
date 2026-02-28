@@ -19,7 +19,7 @@ pkg = {
 pkg.sources = {
 	source = {
 		type = "tar",
-		url = "https://mirrors.dotsrc.org/gnu/mpc/mpc-"..pkg.version..".tar.xz",
+		url = "https://mirrors.dotsrc.org/gnu/mpc/mpc-"..pkg.version..".tar.gz",
 		args = "--strip-components=1",
 	},
 	binary = {
