@@ -21,10 +21,11 @@ pkg.sources = {
 	source = {
 		type = "tar",
 		url = "https://zlib.net/zlib-" .. pkg.version .. ".tar.gz",
+        args = "--strip-components=1"
 	},
 	binary = {
-		type = "file", -- to not make pkglet automatically uncompress and unarchive
-		url = "https://zlib.net/zlib-" .. pkg.version .. "-linux-x86_64.tar.xz",
+		type = "tar",
+		url = "https://files.obsidianos.xyz/~neo/null/"..ARCH.."-zlib.tar.gz",
 	},
 }
 
@@ -56,7 +57,7 @@ end
 function pkg.binary()
 	return function(hook)
 		hook("install")(function()
-			exec("tar -xf zlib-" .. pkg.version .. "-linux-x86_64.tar.xz -C " .. INSTALL .. "/usr")
+            exec("cp -r * "..INSTALL.."/")
 		end)
 	end
 end
