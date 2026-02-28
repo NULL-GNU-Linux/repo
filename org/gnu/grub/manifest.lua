@@ -24,7 +24,7 @@ pkg = {
 pkg.sources = {
 	source = {
 		type = "tar",
-		url = "https://mirrors.dotsrc.org/gnu/grub/grub-"..".tar.xz",
+		url = "https://mirrors.dotsrc.org/gnu/grub/grub-"..pkg.version..".tar.xz",
 		args = "--strip-components=1",
 	},
 	binary = {
