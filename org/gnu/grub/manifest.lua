@@ -51,7 +51,6 @@ function pkg.source()
             exec("rm -rf grub-extras/lua")
             curl("https://raw.githubusercontent.com/NULL-GNU-Linux/extras/refs/heads/main/grub", "grub.default", {"-fsSL"})
             exec("sed -i '1i /^PO-Revision-Date:/ d' po/*.sed")
-            exec("sed 's|/usr/share/fonts/dejavu|/usr/share/fonts/dejavu /usr/share/fonts/TTF|g' -i \"configure.ac\"")
             exec("./linguas.sh")
             exec("echo depends bli part_gpt > grub-core/extra_deps.lst")
 			local configure_opts = {
