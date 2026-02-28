@@ -109,7 +109,12 @@ pkg = {
 			type = "string",
 			default = "",
 			description = "extra configuration options to pass to ./configure",
-		}
+		},
+        selinux = {
+            type = "boolean",
+            default = false,
+            description = "enable SELinux support (requires SELinux installed)"
+        }
 	},
 }
 pkg.sources = {
@@ -128,8 +133,11 @@ function pkg.source()
 		hook("prepare")(function()
 			local configure_opts = {
 				"--prefix=/usr",
-                "ac_cv_header_stropts_h=no"
+                "ac_cv_header_stropts_h=no",
 			}
+            if not OPTIONS.selinux then
+                table.insert(configure_opts, "--without-selinux")
+            end
 			local configg = OPTIONS.config or ""
 			table.insert(configure_opts, configg)
 			configure(configure_opts)
