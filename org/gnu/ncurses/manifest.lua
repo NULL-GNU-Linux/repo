@@ -47,11 +47,12 @@ function pkg.source()
 		hook("prepare")(function()
 			local configure_opts = {
 				"--prefix=/usr",
+                "--libdir=/usr/lib64",
                 "--with-shared",
                 "--without-debug",
                 "--enable-pc-files",
                 "--disable-werror",
-                "--with-pkg-config-libdir=/usr/lib/pkgconfig"
+                "--with-pkg-config-libdir=/usr/lib64/pkgconfig"
 			}
             if OPTIONS.widec then
                 table.insert(configure_opts, "--enable-widec")
