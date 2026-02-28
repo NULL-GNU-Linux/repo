@@ -5,7 +5,7 @@ pkg = {
 	maintainer = "NEOAPPS <neo@obsidianos.xyz>",
 	license = "GPL-3.0",
 	homepage = "https://gnu.org/software/coreutils",
-	depends = {},
+	depends = {"org.kernel.libpcap"},
 	conflicts = {},
 	provides = {
         "coreutils",
