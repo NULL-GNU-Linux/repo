@@ -34,6 +34,7 @@ function pkg.source()
 			local configure_opts = {
 				"--prefix=/usr",
                 "--enable-cxx",
+                "--enable-fat",
                 "CC='gcc -std=gnu17'"
 			}
 			local configg = OPTIONS.config or ""
