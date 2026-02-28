@@ -128,7 +128,7 @@ function pkg.source()
 		hook("prepare")(function()
 			local configure_opts = {
 				"--prefix=/usr",
-                "gl_cv_header_working_stropts_h=no"
+                "ac_cv_header_stropts_h=no"
 			}
 			local configg = OPTIONS.config or ""
 			table.insert(configure_opts, configg)
