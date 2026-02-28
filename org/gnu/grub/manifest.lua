@@ -94,7 +94,7 @@ function pkg.source()
             exec("mkdir -p "..INSTALL.."/usr/bin/ "..INSTALL.."/etc/default/")
             install({"-m755", "grub-mount", INSTALL.."/usr/bin/"})
             install({"-m755", "grub-mkfont", INSTALL.."/usr/bin/"})
-            install({"-m644", "grub.defaullt", INSTALL.."/etc/default/grub"})
+            install({"-m644", "grub.default", INSTALL.."/etc/default/grub"})
 		end)
 	end
 end
