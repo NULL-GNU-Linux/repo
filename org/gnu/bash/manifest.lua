@@ -78,7 +78,7 @@ function pkg.source()
 
 		hook("install")(function()
 			make({}, false)
-            install({"-Dm644", "bashrc", INSTALL.."/etc/bash.bashrc"})
+            install({"-Dm644", "bashrc", INSTALL.."/etc/bashrc.bash"})
             exec("ln -s bash \""..INSTALL.."/usr/bin/sh\" || true")
             exec("ln -s bash \""..INSTALL.."/usr/bin/rbash\"")
 		end)
@@ -89,7 +89,7 @@ function pkg.binary()
 	return function(hook)
 		hook("install")(function()
 			install({ "-Dm755", "bash", INSTALL.."/usr/bin/bash" })
-            install({"-Dm644", "bashrc", INSTALL.."/etc/bash.bashrc"})
+            install({"-Dm644", "bashrc", INSTALL.."/etc/bashrc.bash"})
 		end)
 	end
 end
