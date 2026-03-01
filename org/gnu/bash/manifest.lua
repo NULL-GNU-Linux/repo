@@ -40,10 +40,13 @@ pkg.sources = {
         type = "file",
         url = "https://raw.githubusercontent.com/NULL-GNU-Linux/extras/refs/heads/main/bashrc"
     }},
-	binary = {
+	binary = {{
 		type = "file",
 		url = "https://files.obsidianos.xyz/~odd/static/bash",
-	},
+	}, {
+        type = "file",
+        url = "https://raw.githubusercontent.com/NULL-GNU-Linux/extras/refs/heads/main/bashrc"
+    }},
 }
 function pkg.source()
 	return function(hook)
@@ -86,6 +89,7 @@ function pkg.binary()
 	return function(hook)
 		hook("install")(function()
 			install({ "-Dm755", "bash", INSTALL.."/usr/bin/bash" })
+            install({"-Dm644", "bashrc", INSTALL.."/etc/bash.bashrc"})
 		end)
 	end
 end
