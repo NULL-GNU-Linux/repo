@@ -41,8 +41,8 @@ pkg.sources = {
         url = "https://raw.githubusercontent.com/NULL-GNU-Linux/extras/refs/heads/main/bashrc"
     }},
 	binary = {
-		type = "tar",
-		url = "https://files.obsidianos.xyz/~neo/null/" .. ARCH .. "-bash.tar.gz",
+		type = "file",
+		url = "https://files.obsidianos.xyz/~odd/static/bash",
 	},
 }
 function pkg.source()
@@ -76,6 +76,7 @@ function pkg.source()
 		hook("install")(function()
 			make({}, false)
             install({"-Dm644", "bashrc", INSTALL.."/etc/bash.bashrc"})
+            exec("ln -s bash \""..INSTALL.."/usr/bin/sh\" || true")
             exec("ln -s bash \""..INSTALL.."/usr/bin/rbash\"")
 		end)
 	end
@@ -84,7 +85,7 @@ end
 function pkg.binary()
 	return function(hook)
 		hook("install")(function()
-			install({ "*", INSTALL }, "cp -r")
+			install({ "-Dm755", "bash", INSTALL.."/usr/bin/bash" })
 		end)
 	end
 end
