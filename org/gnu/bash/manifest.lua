@@ -57,7 +57,7 @@ function pkg.source()
                 "--with-curses",
                 "--enable-readline",
                 "--with-installed-readline",
-                "CFLAGS='-DSYS_BASHRC=\"/etc/bashrc.bash\"'"
+                "CFLAGS='-DSYS_BASHRC='\"/etc/bashrc.bash\"''"
 			}
             if OPTIONS.static then
                 table.insert(configure_opts, "--enable-static-link")
