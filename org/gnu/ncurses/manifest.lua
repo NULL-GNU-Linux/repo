@@ -49,6 +49,7 @@ function pkg.source()
 				"--prefix=/usr",
                 "--libdir=/usr/lib64",
                 "--with-shared",
+                "--with-termlib",
                 "--without-debug",
                 "--enable-pc-files",
                 "--disable-werror",
