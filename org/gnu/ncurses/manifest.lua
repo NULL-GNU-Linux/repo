@@ -75,6 +75,7 @@ function pkg.source()
 
 		hook("install")(function()
 			make({}, false)
+            exec("cd "..INSTALL.." && mkdir -p usr/lib/ usr/lib64")
             exec("printf 'INPUT(-lncursesw)\\n' >"..INSTALL.."/usr/lib/libcursesw.so")
             exec("printf 'INPUT(-lncursesw)\\n' >"..INSTALL.."/usr/lib64/libcursesw.so")
             exec("ln -sv libncurses.so "..INSTALL.."/usr/lib/libcurses.so")
@@ -84,9 +85,9 @@ function pkg.source()
             local major = pkg.version:sub(1,1)
             for _, lib in ipairs(libs) do 
                 for _, d in ipairs(dirs) do 
-                    local path = INSTALL.."/"..d 
+                    local path = INSTALL.."/usr/"..d 
                     exec("mkdir -p "..path.."/pkgconfig")
-                    io.writefile(path.."/lib"..lib..".so", "INPUT(libncursesw.so."..major..")\n")
+                    exec("printf 'INPUT(libncursesw.so."..major..")\\n' >"..path.."/lib"..lib..".so")
                     exec("ln -sv libncursesw.so."..major.." "..path.."/lib"..lib..".so."..major)
                     exec("ln -sv ncursesw.pc "..path.."/pkgconfig/"..lib..".pc")
                 end 
