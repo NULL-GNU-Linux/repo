@@ -16,7 +16,7 @@ pkg = {
 		},
         static = {
 			type = "boolean",
-			default = true,
+			default = false,
 			description = "enable static linking",
 		},
         multibyte = {
@@ -76,6 +76,8 @@ function pkg.source()
 		hook("install")(function()
 			make({}, false)
             install({"-Dm644", "bashrc", INSTALL.."/etc/bash.bashrc"})
+            exec("ln -s bash \""..INSTALL.."/usr/bin/sh\" || true")
+            exec("ln -s bash \""..INSTALL.."/usr/bin/rbash\"")
 		end)
 	end
 end
