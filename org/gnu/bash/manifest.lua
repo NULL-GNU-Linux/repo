@@ -69,7 +69,7 @@ function pkg.source()
             end
 			local configg = OPTIONS.config or ""
 			table.insert(configure_opts, configg)
-			configure(configure_opts, "configure --help && CFLAGS='-DSYS_BASHRC='\\\"/etc/bash/bashrc\\\"'' ./configure")
+			configure(configure_opts, "configure --help && CFLAGS='-DSYS_BASHRC=\"/etc/bash/bashrc\"' ./configure")
 		end)
 
 		hook("build")(function()
