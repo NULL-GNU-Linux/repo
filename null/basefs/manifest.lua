@@ -24,8 +24,9 @@ pkg.sources = {
 function basefs()
     local cdpath = "cd " .. INSTALL .. " && "
 	exec(
-		cdpath .. " && mkdir -p usr/bin usr/lib usr/local/bin usr/local/lib usr/local/share opt/bin usr/lib64 home var/spool/main var/www root proc sys var/cache var/db var/tmp srv boot efi/EFI mnt opt media run etc/env.d"
+		cdpath .. " && mkdir -p usr/bin usr/lib usr/local/bin usr/local/lib usr/local/share opt/bin usr/lib64 home var/spool/main var/www root proc sys var/cache var/db var/tmp srv boot efi/EFI mnt opt media run etc/env.d var/tmp var/lib/pkglet"
 	)
+    exec(cdpath.."touch var/.pkglet")
 	exec(cdpath.."ln -s usr/bin bin")
 	exec(cdpath.."ln -s usr/local/bin usr/local/sbin")
 	exec(cdpath.."ln -s usr/bin sbin")
