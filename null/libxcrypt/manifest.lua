@@ -45,6 +45,7 @@ function pkg.source()
 
 		hook("install")(function()
 			make({}, false)
+            exec("ln -s libcrypt.so.1 "..INSTALL.."/usr/lib64/libcrypt.so.2")
 		end)
 	end
 end
