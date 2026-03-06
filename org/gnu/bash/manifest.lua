@@ -51,6 +51,7 @@ pkg.sources = {
 function pkg.source()
 	return function(hook)
 		hook("prepare")(function()
+            exec("sed -i 's|^#define SYS_BASHRC .*|#define SYS_BASHRC \"/etc/bash/bashrc\"|' config-top.h")
 			local configure_opts = {
 				"--prefix=/usr",
                 "--libdir=/usr/lib64",
@@ -69,7 +70,7 @@ function pkg.source()
             end
 			local configg = OPTIONS.config or ""
 			table.insert(configure_opts, configg)
-			configure(configure_opts, "configure --help && CFLAGS='-DSYS_BASHRC=\"/etc/bash/bashrc\"' ./configure")
+			configure(configure_opts)
 		end)
 
 		hook("build")(function()
