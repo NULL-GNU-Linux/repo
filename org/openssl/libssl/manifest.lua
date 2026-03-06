@@ -31,6 +31,7 @@ pkg.sources = {
 	source = {
 		type = "tar",
 		url = "https://github.com/openssl/openssl/releases/download/openssl-" .. pkg.version .. "/openssl-" .. pkg.version .. ".tar.gz",
+        args = "--strip-components=1"
 	},
 	binary = {
 		type = "file",
