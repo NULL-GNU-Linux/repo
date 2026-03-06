@@ -51,7 +51,7 @@ pkg.sources = {
 function pkg.source()
 	return function(hook)
 		hook("prepare")(function()
-            exec("sed -i 's|^#define SYS_BASHRC .*|#define SYS_BASHRC \"/etc/bash/bashrc\"|' config-top.h")
+            exec("echo '#define SYS_BASHRC \"/etc/bash/bashrc\"' >> config-top.h")
 			local configure_opts = {
 				"--prefix=/usr",
                 "--libdir=/usr/lib64",
