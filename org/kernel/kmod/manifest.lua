@@ -29,7 +29,7 @@ function pkg.source()
 		end)
 
 		hook("install")(function()
-			meson({"--destdir="..INSTALL, "install", "-C", "builddir/"})
+			meson({"install", "--destdir="..INSTALL, "-C", "builddir/"})
 		end)
 	end
 end
