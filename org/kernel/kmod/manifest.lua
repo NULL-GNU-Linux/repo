@@ -7,6 +7,7 @@ pkg = {
 	homepage = "https://github.com/kmod-project/kmod",
 	depends = {},
 	conflicts = {},
+    provides = {"kmod", "modprobe", "insmod", "depmod", "modinfo", "lsmod", "rmmod"},
 }
 pkg.sources = {
 	source = {
