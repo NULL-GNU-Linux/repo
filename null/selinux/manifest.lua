@@ -23,7 +23,7 @@ pkg.sources = {
 function pkg.source()
 	return function(hook)
 		hook("build")(function()
-            make()
+            make({"PREFIX=/usr"})
 		end)
 
 		hook("install")(function()
