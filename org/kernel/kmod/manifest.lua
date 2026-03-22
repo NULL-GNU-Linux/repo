@@ -21,7 +21,7 @@ pkg.sources = {
 }
 function pkg.source()
 	return function(hook)
-        hook("build")(function()
+        hook("prepare")(function()
             meson({"setup", "--buildtype", "release", "builddir/"})
         end)
 		hook("build")(function()
