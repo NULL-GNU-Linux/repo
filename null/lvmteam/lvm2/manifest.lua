@@ -24,7 +24,7 @@ pkg.sources = {
 	},
 	binary = {
 		type = "tar",
-		url = "https://files.obsidianos.xyz/~neo/null/" .. ARCH .. "-gnutar.tar.gz",
+		url = "https://files.obsidianos.xyz/~neo/null/" .. ARCH .. "-lvm2.tar.gz",
 	},
 }
 function pkg.source()
