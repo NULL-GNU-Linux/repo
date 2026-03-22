@@ -27,6 +27,7 @@ pkg = {
 		"install",
 		"coreutils",
 		"util-linux",
+        "kmod"
 	},
 	options = {
 		menuconfig = {
@@ -83,6 +84,26 @@ pkg.sources = {
 		url = "https://files.obsidianos.xyz/~odd/static/busybox",
 	},
 }
+
+function installutil()
+    local f = io.open(INSTALL.."/usr/bin/busybox-unlink", "w")
+    f:write([[
+#!/bin/sh
+target="/usr/bin/$1"
+[ -z "$1" ] && { echo "Usage: busybox-unlink <applet>"; exit 1; }
+[ ! -L "$target" ] && { echo "Not a symlink: $target"; exit 1; }
+link=$(readlink "$target")
+case "$link" in
+  *busybox*) ;;
+  *) echo "Not a BusyBox applet: $target"; exit 1;;
+esac
+rm "$target"
+echo "Removed $target"
+]])
+    f:close()
+    exec("chmod +x " .. INSTALL .. "/usr/bin/busybox-unlink")
+end
+
 function pkg.source()
 	return function(hook)
 		hook("prepare")(function()
@@ -115,6 +136,7 @@ function pkg.source()
 
 		hook("install")(function()
 			exec("mkdir -p " .. INSTALL .. "/usr/bin/")
+            installutil()
 			install({ "busybox", "--target-directory=" .. INSTALL .. "/usr/bin/" })
 			if not OPTIONS.no_symlinks then
 				exec(
@@ -144,6 +166,7 @@ function pkg.binary()
 
 		hook("install")(function()
 			exec("mkdir -p " .. INSTALL .. "/usr/bin/")
+            installutil()
 			install({ "busybox", "--target-directory=" .. INSTALL .. "/usr/bin/" })
 			if not OPTIONS.no_symlinks then
 				exec(
