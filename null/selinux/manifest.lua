@@ -5,7 +5,7 @@ pkg = {
 	maintainer = "NEOAPPS <neo@obsidianos.xyz>",
 	license = "GPL-2.0",
 	homepage = "https://github.com/SELinuxProject/selinux",
-	depends = {"audit-daemon"},
+	depends = {},
 	conflicts = {},
 	provides = { "libselinux", "selinux" },
 }
@@ -23,7 +23,7 @@ pkg.sources = {
 function pkg.source()
 	return function(hook)
 		hook("build")(function()
-            make({"PREFIX=/usr"})
+            make({"PREFIX=/usr", "DISABLE_AUDIT=y"})
 		end)
 
 		hook("install")(function()
