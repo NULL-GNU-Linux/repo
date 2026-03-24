@@ -5,7 +5,7 @@ pkg = {
 	maintainer = "NEOAPPS <neo@obsidianos.xyz>",
 	license = "GPL-2.0",
 	homepage = "https://github.com/SELinuxProject/selinux",
-	depends = {},
+	depends = {"audit-daemon"},
 	conflicts = {},
 	provides = { "libselinux", "selinux" },
 }
