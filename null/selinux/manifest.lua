@@ -23,7 +23,7 @@ pkg.sources = {
 function pkg.source()
 	return function(hook)
 		hook("build")(function()
-            make({"PREFIX=/usr", "DISABLE_AUDIT=y", "SHLIBDIR=\"/usr/lib\"", "FTS_LDLIBS=\"-lfts\""})
+            make({"PREFIX=/usr", "SHLIBDIR=\"/usr/lib\""})
 		end)
 
 		hook("install")(function()
