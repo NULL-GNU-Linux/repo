@@ -12,7 +12,7 @@ pkg = {
 pkg.sources = {
 	source = {
 		type = "tar",
-		url = "https://github.com/SELinuxProject/selinux/releases/download/"..pkg.version.."libselinux-"..pkg.version..".tar.gz",
+		url = "https://github.com/SELinuxProject/selinux/releases/download/"..pkg.version.."/libselinux-"..pkg.version..".tar.gz",
 		args = "--strip-components=1",
 	},
 	binary = {
